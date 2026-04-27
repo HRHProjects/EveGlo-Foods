@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ArrowRight,
   Check,
@@ -11,6 +11,33 @@ import {
   X
 } from 'lucide-react';
 import { departments, highlights, products, testimonials } from './productData.js';
+
+const heroSlides = [
+  {
+    label: 'Launch lineup',
+    title: 'Shirataki rice, noodles, and pasta in one clean pantry range.',
+    text: 'The new EveGlo product mockup anchors the storefront hero with real packaging photography.',
+    image: '/assets/product-mockup1.png',
+    alt: 'EveGlo Foods shirataki rice, noodles, and spaghetti product packaging displayed on a kitchen counter',
+    focus: 'center'
+  },
+  {
+    label: 'Low-carb meals',
+    title: 'Rice and noodle staples for fast weeknight cooking.',
+    text: 'Slide through the range before browsing the full collection below.',
+    image: '/assets/product-mockup1.png',
+    alt: 'EveGlo Foods rice and noodle product lineup',
+    focus: 'left center'
+  },
+  {
+    label: 'Retail ready',
+    title: 'Shelf-ready packaging for online and wholesale buyers.',
+    text: 'A premium first impression for shoppers, retailers, and distributors.',
+    image: '/assets/product-mockup1.png',
+    alt: 'EveGlo Foods retail product boxes and pouches',
+    focus: 'right center'
+  }
+];
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -48,6 +75,16 @@ function Header() {
 }
 
 function Hero() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 5200);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
     <section className="hero" id="home">
       <div className="hero-copy">
@@ -67,19 +104,41 @@ function Hero() {
         </div>
       </div>
 
-      <div className="hero-visual" aria-label="EveGlo product display">
-        <div className="glow-sun" />
-        <div className="leaf-orbit orbit-one" />
-        <div className="leaf-orbit orbit-two" />
-        <div className="product-stack card-large">
-          <span className="mini-badge">EveGlo</span>
-          <h3>High Protein Pasta</h3>
-          <p>135g protein per box</p>
+      <div className="hero-gallery" aria-label="EveGlo product gallery">
+        <div className="gallery-frame">
+          {heroSlides.map((slide, index) => (
+            <figure
+              className={`gallery-slide ${activeSlide === index ? 'is-active' : ''}`}
+              key={slide.label}
+              aria-hidden={activeSlide !== index}
+            >
+              <img
+                src={slide.image}
+                alt={activeSlide === index ? slide.alt : ''}
+                style={{ objectPosition: slide.focus }}
+              />
+              <figcaption>
+                <span>{slide.label}</span>
+                <strong>{slide.title}</strong>
+                <small>{slide.text}</small>
+              </figcaption>
+            </figure>
+          ))}
         </div>
-        <div className="product-stack card-small">
-          <span className="mini-badge dark">New</span>
-          <h3>Turmeric Rice</h3>
-          <p>Golden low-carb blend</p>
+
+        <div className="gallery-controls" aria-label="Choose hero gallery slide">
+          {heroSlides.map((slide, index) => (
+            <button
+              type="button"
+              key={slide.label}
+              className={activeSlide === index ? 'active' : ''}
+              onClick={() => setActiveSlide(index)}
+              aria-label={`Show ${slide.label} slide`}
+              aria-pressed={activeSlide === index}
+            >
+              <span>{String(index + 1).padStart(2, '0')}</span>
+            </button>
+          ))}
         </div>
       </div>
     </section>
