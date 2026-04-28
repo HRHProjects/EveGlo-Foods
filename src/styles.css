@@ -166,11 +166,20 @@ button { cursor: pointer; }
 
 .hero h1 {
   margin: 0;
-  max-width: 680px;
-  font-size: clamp(2.5rem, 5.2vw, 5.4rem);
-  line-height: 0.92;
-  letter-spacing: -0.055em;
+  max-width: 620px;
+  font-size: clamp(2.25rem, 4.8vw, 5rem);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
   color: var(--charcoal);
+}
+.hero h1 span {
+  display: block;
+}
+.hero h1 span:nth-child(2) {
+  margin-left: clamp(14px, 4vw, 56px);
+}
+.hero h1 span:nth-child(3) {
+  color: var(--green-dark);
 }
 
 .hero-text {
@@ -234,6 +243,15 @@ button { cursor: pointer; }
   background: var(--white);
   box-shadow: 0 18px 58px rgba(34, 36, 41, 0.12);
 }
+.hero-image-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(251, 255, 247, 0.88) 0%, rgba(251, 255, 247, 0.56) 26%, rgba(251, 255, 247, 0) 52%),
+    linear-gradient(0deg, rgba(251, 255, 247, 0.68) 0%, rgba(251, 255, 247, 0) 38%);
+  pointer-events: none;
+}
 .hero-image-frame img {
   width: 100%;
   height: 100%;
@@ -250,17 +268,14 @@ button { cursor: pointer; }
   left: max(22px, calc((100vw - 1196px) / 2));
   bottom: clamp(22px, 4vw, 48px);
   z-index: 2;
-  width: min(720px, calc(100% - 44px));
-  padding: clamp(20px, 3vw, 34px);
-  border: 1px solid rgba(255, 255, 255, 0.74);
-  border-radius: 26px;
-  background: rgba(251, 255, 247, 0.82);
-  box-shadow: 0 24px 70px rgba(34, 36, 41, 0.16);
-  backdrop-filter: blur(18px);
+  width: min(650px, calc(100% - 44px));
+  padding: 0;
+  filter: drop-shadow(0 12px 26px rgba(255, 255, 255, 0.74));
 }
 .hero-title-panel .eyebrow {
   margin-bottom: 14px;
   color: var(--green-dark);
+  text-shadow: 0 2px 16px rgba(255, 255, 255, 0.92);
 }
 
 .category-strip {
@@ -832,15 +847,19 @@ blockquote {
   .navbar { min-height: 74px; }
   .brand img { width: 146px; }
   .nav-actions .cart-button { display: none; }
-  .hero h1 { font-size: clamp(2.35rem, 11vw, 3.7rem); }
+  .hero h1 { font-size: clamp(2.15rem, 10vw, 3.45rem); }
+  .hero h1 span:nth-child(2) { margin-left: 14px; }
   .hero-visual, .hero-image-frame, .hero-image-frame img { min-height: 48vh; }
+  .hero-image-frame::after {
+    background:
+      linear-gradient(0deg, rgba(251, 255, 247, 0.9) 0%, rgba(251, 255, 247, 0.54) 36%, rgba(251, 255, 247, 0) 70%);
+  }
   .hero-title-panel {
     left: 16px;
     right: 16px;
     bottom: 16px;
     width: auto;
-    padding: 18px;
-    border-radius: 20px;
+    max-width: 460px;
   }
   .hero-title-panel .eyebrow { font-size: 0.7rem; }
   .site-search {

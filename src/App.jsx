@@ -94,7 +94,11 @@ function Hero({ navigate }) {
           <img src={heroImage.image} alt={heroImage.alt} />
           <div className="hero-title-panel">
             <p className="eyebrow"><Leaf size={16} /> Plant-forward pantry essentials</p>
-            <h1>Clean comfort foods for modern low-carb kitchens.</h1>
+            <h1>
+              <span>Clean comfort</span>
+              <span>foods for modern</span>
+              <span>low-carb kitchens.</span>
+            </h1>
           </div>
         </div>
       </div>
