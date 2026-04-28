@@ -821,6 +821,37 @@ blockquote {
   display: none;
 }
 
+@keyframes desktopProductDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-50% - 9px), 0, 0); }
+}
+
+@media (min-width: 1021px) {
+  .collection {
+    overflow: hidden;
+  }
+
+  .collection .product-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 278px;
+    width: max-content;
+    margin: -8px -22px 0;
+    padding: 8px 22px 22px;
+    animation: desktopProductDrift 46s linear infinite;
+    will-change: transform;
+  }
+
+  .collection .product-grid:hover,
+  .collection .product-grid:focus-within {
+    animation-play-state: paused;
+  }
+
+  .collection .mobile-loop-card {
+    display: block;
+  }
+}
+
 @media (max-width: 1020px) {
   .navbar { grid-template-columns: auto auto 1fr; }
   .menu-button { display: grid; order: 3; justify-self: end; }
