@@ -551,6 +551,34 @@ function Footer({ navigate }) {
   );
 }
 
+function MobileDock({ navigate, onSearch }) {
+  const openShop = () => {
+    onSearch('');
+    navigate('home', 'shop');
+  };
+
+  return (
+    <nav className="mobile-dock" aria-label="Mobile quick actions">
+      <button type="button" onClick={() => navigate('home', 'home')}>
+        <Leaf size={18} />
+        <span>Home</span>
+      </button>
+      <button type="button" onClick={openShop}>
+        <Search size={18} />
+        <span>Shop</span>
+      </button>
+      <a href="/news/eveglo-foods-launch-delay/">
+        <Megaphone size={18} />
+        <span>News</span>
+      </a>
+      <a href="mailto:Info@EveGlofoods.com">
+        <Mail size={18} />
+        <span>Contact</span>
+      </a>
+    </nav>
+  );
+}
+
 export default function App() {
   const [page, setPage] = useState('home');
   const [activeProduct, setActiveProduct] = useState(null);
@@ -599,6 +627,7 @@ export default function App() {
         {page === 'privacy' && <PrivacyPolicyPage />}
         {page === 'product' && <ProductDetail product={activeProduct} navigate={navigate} />}
       </main>
+      <MobileDock navigate={navigate} onSearch={setSearchQuery} />
       <Footer navigate={navigate} />
     </div>
   );
