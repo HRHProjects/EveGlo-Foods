@@ -16,28 +16,34 @@ import { departments, highlights, products, testimonials } from './productData.j
 
 const heroSlides = [
   {
-    label: 'Launch lineup',
-    title: 'Shirataki rice, noodles, and pasta in one clean pantry range.',
-    text: 'The new EveGlo product mockup anchors the storefront hero with real packaging photography.',
-    image: '/assets/product-mockup1.png',
-    alt: 'EveGlo Foods shirataki rice, noodles, and spaghetti product packaging displayed on a kitchen counter',
+    label: 'Collection 01',
+    image: '/assets/hero-gallery/collection-mockup-1.png',
+    alt: 'EveGlo Foods product collection mockup display',
     focus: 'center'
   },
   {
-    label: 'Low-carb meals',
-    title: 'Rice and noodle staples for fast weeknight cooking.',
-    text: 'Slide through the range before browsing the full collection below.',
-    image: '/assets/product-mockup1.png',
-    alt: 'EveGlo Foods rice and noodle product lineup',
-    focus: 'left center'
+    label: 'Collection 02',
+    image: '/assets/hero-gallery/collection-mockup-2.png',
+    alt: 'EveGlo Foods low-carb rice and noodle packaging mockup',
+    focus: 'center'
   },
   {
-    label: 'Retail ready',
-    title: 'Shelf-ready packaging for online and wholesale buyers.',
-    text: 'A premium first impression for shoppers, retailers, and distributors.',
-    image: '/assets/product-mockup1.png',
-    alt: 'EveGlo Foods retail product boxes and pouches',
-    focus: 'right center'
+    label: 'Collection 03',
+    image: '/assets/hero-gallery/collection-mockup-3.png',
+    alt: 'EveGlo Foods product lineup hero mockup',
+    focus: 'center'
+  },
+  {
+    label: 'Collection 04',
+    image: '/assets/hero-gallery/collection-mockup-4.png',
+    alt: 'EveGlo Foods shirataki product packaging mockup',
+    focus: 'center'
+  },
+  {
+    label: 'Collection 05',
+    image: '/assets/hero-gallery/collection-mockup-5.png',
+    alt: 'EveGlo Foods retail product collection mockup',
+    focus: 'center'
   }
 ];
 
@@ -126,11 +132,6 @@ function Hero({ navigate }) {
                 alt={activeSlide === index ? slide.alt : ''}
                 style={{ objectPosition: slide.focus }}
               />
-              <figcaption>
-                <span>{slide.label}</span>
-                <strong>{slide.title}</strong>
-                <small>{slide.text}</small>
-              </figcaption>
             </figure>
           ))}
         </div>
