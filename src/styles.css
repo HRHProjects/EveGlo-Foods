@@ -87,13 +87,18 @@ button { cursor: pointer; }
 .menu-button { display: none; }
 
 .hero {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: clamp(58px, 7vw, 104px) 22px 42px;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 42px;
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
-  gap: clamp(32px, 6vw, 82px);
-  align-items: center;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.hero-copy {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  padding: clamp(34px, 5vw, 64px) 22px 0;
 }
 
 .eyebrow {
@@ -163,17 +168,20 @@ button { cursor: pointer; }
 
 .hero-gallery {
   position: relative;
-  min-height: 560px;
+  order: -1;
+  min-height: clamp(360px, 50vh, 640px);
+  width: 100%;
 }
 
 .gallery-frame {
-  min-height: 560px;
+  min-height: clamp(360px, 50vh, 640px);
   position: relative;
   overflow: hidden;
-  border-radius: 40px;
-  border: 1px solid rgba(46, 212, 79, 0.22);
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(46, 212, 79, 0.22);
   background: var(--white);
-  box-shadow: 0 28px 80px rgba(34, 36, 41, 0.13);
+  box-shadow: 0 18px 58px rgba(34, 36, 41, 0.12);
 }
 
 .gallery-slide {
@@ -195,7 +203,7 @@ button { cursor: pointer; }
 .gallery-slide img {
   width: 100%;
   height: 100%;
-  min-height: 560px;
+  min-height: clamp(360px, 50vh, 640px);
   display: block;
   object-fit: cover;
 }
@@ -250,7 +258,7 @@ button { cursor: pointer; }
 
 .gallery-controls {
   position: absolute;
-  right: 24px;
+  right: max(22px, calc((100vw - 1196px) / 2));
   top: 24px;
   z-index: 3;
   display: flex;
@@ -550,8 +558,6 @@ blockquote {
     box-shadow: 0 30px 60px rgba(34,36,41,0.16);
   }
   .nav-links.is-open { display: flex; }
-  .hero { grid-template-columns: 1fr; }
-  .hero-gallery, .gallery-frame, .gallery-slide img { min-height: 500px; }
   .category-strip, .product-grid { grid-template-columns: repeat(2, 1fr); }
   .promo-band, .wholesale { grid-template-columns: 1fr; }
 }
@@ -561,10 +567,8 @@ blockquote {
   .navbar { min-height: 74px; }
   .brand img { width: 146px; }
   .nav-actions button { display: none; }
-  .hero { padding-top: 42px; }
   .hero h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
-  .hero-gallery, .gallery-frame, .gallery-slide img { min-height: 430px; }
-  .gallery-frame { border-radius: 28px; }
+  .hero-gallery, .gallery-frame, .gallery-slide img { min-height: 48vh; }
   .gallery-controls { left: 18px; right: auto; top: 18px; }
   .gallery-slide figcaption small { display: none; }
   .category-strip, .product-grid, .highlights, .testimonial-grid, .footer { grid-template-columns: 1fr; }
