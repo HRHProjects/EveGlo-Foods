@@ -431,7 +431,12 @@ function Highlights() {
 }
 
 function KonjacFacts() {
-  const [activeFact, setActiveFact] = useState(konjacFacts[0]?.title || '');
+  const [activeFact, setActiveFact] = useState('');
+  const toggleFact = (title) => {
+    const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (isDesktopPointer) return;
+    setActiveFact((current) => (current === title ? '' : title));
+  };
 
   return (
     <section className="konjac-section">
@@ -449,12 +454,20 @@ function KonjacFacts() {
               type="button"
               key={fact.title}
               className={`konjac-fact ${activeFact === fact.title ? 'is-active' : ''}`}
-              onClick={() => setActiveFact(fact.title)}
+              aria-expanded={activeFact === fact.title}
+              onPointerEnter={(event) => {
+                if (event.pointerType === 'mouse') setActiveFact(fact.title);
+              }}
+              onPointerLeave={(event) => {
+                if (event.pointerType === 'mouse') setActiveFact('');
+              }}
+              onClick={() => toggleFact(fact.title)}
               onFocus={() => setActiveFact(fact.title)}
+              onBlur={() => setActiveFact('')}
             >
               <span>{fact.kicker}</span>
               <strong>{fact.title}</strong>
-              <em>{fact.detail}</em>
+              <em><b>Note:</b> {fact.detail}</em>
             </button>
           ))}
         </div>

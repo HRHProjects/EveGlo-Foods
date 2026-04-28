@@ -837,6 +837,11 @@ h1, h2, h3 {
   transform: translateY(10px);
   transition: max-height 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
 }
+.konjac-fact em b {
+  color: var(--green-dark);
+  font-style: normal;
+  font-weight: 900;
+}
 .konjac-fact:hover,
 .konjac-fact:focus-visible,
 .konjac-fact.is-active {
