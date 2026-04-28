@@ -89,9 +89,17 @@ function Header({ navigate, onSearch }) {
 function Hero({ navigate }) {
   return (
     <section className="hero" id="home">
+      <div className="hero-visual" aria-label="EveGlo product collection">
+        <div className="hero-image-frame">
+          <img src={heroImage.image} alt={heroImage.alt} />
+          <div className="hero-title-panel">
+            <p className="eyebrow"><Leaf size={16} /> Plant-forward pantry essentials</p>
+            <h1>Clean comfort foods for modern low-carb kitchens.</h1>
+          </div>
+        </div>
+      </div>
+
       <div className="hero-copy">
-        <p className="eyebrow"><Leaf size={16} /> Plant-forward pantry essentials</p>
-        <h1>Clean comfort foods for modern low-carb kitchens.</h1>
         <p className="hero-text">
           EveGlo Foods brings low-carb pasta, shirataki rice, and high-protein pantry staples into a polished Canadian grocery experience built for retail, online orders, and wholesale growth.
         </p>
@@ -103,12 +111,6 @@ function Hero({ navigate }) {
           <span><Check size={16} /> Low carb options</span>
           <span><Check size={16} /> Plant-based range</span>
           <span><Check size={16} /> Fast prep meals</span>
-        </div>
-      </div>
-
-      <div className="hero-visual" aria-label="EveGlo product collection">
-        <div className="hero-image-frame">
-          <img src={heroImage.image} alt={heroImage.alt} />
         </div>
       </div>
     </section>
