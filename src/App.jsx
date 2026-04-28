@@ -191,10 +191,14 @@ function ProductCard({ product, onOpenProduct }) {
         aria-label={`View details for ${product.name}`}
       >
       <div className="product-image">
-        <div className="pack-front">
-          <span>EveGlo</span>
-          <strong>{product.tag}</strong>
-        </div>
+        {product.image ? (
+          <img className="product-photo" src={product.image} alt={product.imageAlt || product.name} />
+        ) : (
+          <div className="pack-front">
+            <span>EveGlo</span>
+            <strong>{product.tag}</strong>
+          </div>
+        )}
       </div>
       <div className="product-info">
         <div className="product-meta">
@@ -335,10 +339,14 @@ function ProductDetail({ product, navigate }) {
       </button>
       <div className="detail-layout">
         <div className={`detail-pack accent-${product.accent}`}>
-          <div className="pack-front">
-            <span>EveGlo</span>
-            <strong>{product.tag}</strong>
-          </div>
+          {product.image ? (
+            <img className="detail-photo" src={product.image} alt={product.imageAlt || product.name} />
+          ) : (
+            <div className="pack-front">
+              <span>EveGlo</span>
+              <strong>{product.tag}</strong>
+            </div>
+          )}
         </div>
         <div>
           <p className="eyebrow"><Leaf size={16} /> Product detail</p>
