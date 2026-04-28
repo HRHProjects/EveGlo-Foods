@@ -997,13 +997,15 @@ blockquote {
     grid-template-columns: none;
     overflow-x: auto;
     overscroll-behavior-inline: contain;
-    scroll-snap-type: inline mandatory;
+    scroll-snap-type: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
     gap: 14px;
     margin: 0 -16px;
     padding: 0 16px 14px;
   }
   .product-card {
-    scroll-snap-align: center;
+    scroll-snap-align: none;
     border-radius: 24px;
   }
   .mobile-loop-card { display: block; }
