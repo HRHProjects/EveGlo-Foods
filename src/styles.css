@@ -74,15 +74,15 @@ button { cursor: pointer; }
   font-weight: 700;
 }
 
-.nav-links button {
+.nav-links button, .nav-links a {
   border: 0;
   padding: 0;
   background: transparent;
   color: inherit;
   font-weight: inherit;
 }
-.nav-links button { transition: color 0.2s ease; }
-.nav-links button:hover { color: var(--green-dark); }
+.nav-links button, .nav-links a { transition: color 0.2s ease; }
+.nav-links button:hover, .nav-links a:hover { color: var(--green-dark); }
 
 .nav-actions { display: flex; gap: 9px; }
 .nav-actions button, .nav-actions a, .menu-button {

@@ -58,7 +58,7 @@ function Header({ navigate, onSearch }) {
             <button type="button" onClick={() => go('home', 'shop')} key={department}>{department}</button>
           ))}
           <button type="button" onClick={() => go('about')}>About</button>
-          <button type="button" onClick={() => go('updates')}>Launch Updates</button>
+          <a href="/news/eveglo-foods-launch-delay/">News</a>
           <button type="button" onClick={() => go('home', 'wholesale')}>Wholesale</button>
         </div>
 
@@ -532,7 +532,7 @@ function Footer({ navigate }) {
       <div>
         <h4>Company</h4>
         <button type="button" onClick={() => navigate('about')}>About</button>
-        <button type="button" onClick={() => navigate('updates')}>Launch Updates</button>
+        <a href="/news/eveglo-foods-launch-delay/">News</a>
         <button type="button" onClick={() => navigate('home', 'wholesale')}>Wholesale</button>
         <a href="mailto:Info@EveGlofoods.com">Contact us</a>
         <button type="button" onClick={() => navigate('privacy')}>Privacy Policy</button>

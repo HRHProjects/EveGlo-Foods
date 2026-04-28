@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+Sitemap: https://eveglofoods.com/sitemap.xml
+Sitemap: https://eveglofoods.com/news-sitemap.xml

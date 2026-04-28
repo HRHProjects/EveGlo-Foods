@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <url>
+    <loc>https://eveglofoods.com/news/eveglo-foods-launch-delay/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>EveGlo Foods</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-04-28T00:00:00-06:00</news:publication_date>
+      <news:title>EveGlo Foods launch delayed during ongoing Pacdora dispute</news:title>
+      <news:keywords>EveGlo Foods, Alberta food startup, product launch, Pacdora dispute, shirataki rice, low carb pasta</news:keywords>
+    </news:news>
+  </url>
+</urlset>
