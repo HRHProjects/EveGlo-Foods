@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   ArrowRight,
   Check,
   Leaf,
   Mail,
+  Megaphone,
   Menu,
   Search,
   ShieldCheck,
@@ -14,44 +15,25 @@ import {
 } from 'lucide-react';
 import { departments, highlights, products, testimonials } from './productData.js';
 
-const heroSlides = [
-  {
-    label: 'Collection 01',
-    image: '/assets/hero-gallery/collection-mockup-1.png',
-    alt: 'EveGlo Foods product collection mockup display',
-    focus: 'center'
-  },
-  {
-    label: 'Collection 02',
-    image: '/assets/hero-gallery/collection-mockup-2.png',
-    alt: 'EveGlo Foods low-carb rice and noodle packaging mockup',
-    focus: 'center'
-  },
-  {
-    label: 'Collection 03',
-    image: '/assets/hero-gallery/collection-mockup-3.png',
-    alt: 'EveGlo Foods product lineup hero mockup',
-    focus: 'center'
-  },
-  {
-    label: 'Collection 04',
-    image: '/assets/hero-gallery/collection-mockup-4.png',
-    alt: 'EveGlo Foods shirataki product packaging mockup',
-    focus: 'center'
-  },
-  {
-    label: 'Collection 05',
-    image: '/assets/hero-gallery/collection-mockup-5.png',
-    alt: 'EveGlo Foods retail product collection mockup',
-    focus: 'center'
-  }
-];
+const heroImage = {
+  image: '/assets/hero-gallery/collection-mockup-5.png',
+  alt: 'EveGlo Foods retail product collection mockup'
+};
 
-function Header({ navigate }) {
+function Header({ navigate, onSearch }) {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const go = (page, section) => {
     setOpen(false);
     navigate(page, section);
+  };
+  const submitSearch = (event) => {
+    event.preventDefault();
+    onSearch(searchTerm.trim());
+    setOpen(false);
+    setSearchOpen(false);
+    navigate('home', 'shop');
   };
 
   return (
@@ -76,30 +58,35 @@ function Header({ navigate }) {
             <button type="button" onClick={() => go('home', 'shop')} key={department}>{department}</button>
           ))}
           <button type="button" onClick={() => go('about')}>About</button>
+          <button type="button" onClick={() => go('updates')}>Launch Updates</button>
           <button type="button" onClick={() => go('home', 'wholesale')}>Wholesale</button>
         </div>
 
         <div className="nav-actions">
-          <button aria-label="Search"><Search size={19} /></button>
+          <button type="button" aria-label="Search products" onClick={() => setSearchOpen((current) => !current)}><Search size={19} /></button>
           <a href="mailto:Info@EveGlofoods.com" aria-label="Contact us"><Mail size={19} /></a>
-          <button aria-label="Cart"><ShoppingBag size={19} /></button>
+          <button type="button" className="cart-button" aria-label="Cart"><ShoppingBag size={19} /></button>
         </div>
       </nav>
+      {searchOpen && (
+        <form className="site-search" onSubmit={submitSearch}>
+          <Search size={18} />
+          <input
+            autoFocus
+            type="search"
+            value={searchTerm}
+            placeholder="Search pasta, rice, protein..."
+            aria-label="Search products"
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+          <button type="submit">Search</button>
+        </form>
+      )}
     </header>
   );
 }
 
 function Hero({ navigate }) {
-  const [activeSlide, setActiveSlide] = useState(0);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroSlides.length);
-    }, 5200);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
   return (
     <section className="hero" id="home">
       <div className="hero-copy">
@@ -119,36 +106,9 @@ function Hero({ navigate }) {
         </div>
       </div>
 
-      <div className="hero-gallery" aria-label="EveGlo product gallery">
-        <div className="gallery-frame">
-          {heroSlides.map((slide, index) => (
-            <figure
-              className={`gallery-slide ${activeSlide === index ? 'is-active' : ''}`}
-              key={slide.label}
-              aria-hidden={activeSlide !== index}
-            >
-              <img
-                src={slide.image}
-                alt={activeSlide === index ? slide.alt : ''}
-                style={{ objectPosition: slide.focus }}
-              />
-            </figure>
-          ))}
-        </div>
-
-        <div className="gallery-controls" aria-label="Choose hero gallery slide">
-          {heroSlides.map((slide, index) => (
-            <button
-              type="button"
-              key={slide.label}
-              className={activeSlide === index ? 'active' : ''}
-              onClick={() => setActiveSlide(index)}
-              aria-label={`Show ${slide.label} slide`}
-              aria-pressed={activeSlide === index}
-            >
-              <span>{String(index + 1).padStart(2, '0')}</span>
-            </button>
-          ))}
+      <div className="hero-visual" aria-label="EveGlo product collection">
+        <div className="hero-image-frame">
+          <img src={heroImage.image} alt={heroImage.alt} />
         </div>
       </div>
     </section>
@@ -215,17 +175,27 @@ function ProductCard({ product, onOpenProduct }) {
   );
 }
 
-function FeaturedCollection({ onOpenProduct }) {
+function FeaturedCollection({ onOpenProduct, searchQuery, onSearchChange }) {
   const [filter, setFilter] = useState('All');
   const filters = ['All', 'Low carb', 'High protein', 'Rice', 'Pasta'];
 
   const visibleProducts = useMemo(() => {
-    if (filter === 'All') return products;
+    const query = searchQuery.trim().toLowerCase();
     const value = filter.toLowerCase();
-    return products.filter((product) =>
-      product.name.toLowerCase().includes(value) || product.tag.toLowerCase().includes(value)
-    );
-  }, [filter]);
+    return products.filter((product) => {
+      const searchable = [
+        product.name,
+        product.tag,
+        product.badge,
+        product.size,
+        product.summary,
+        ...product.details
+      ].join(' ').toLowerCase();
+      const matchesFilter = filter === 'All' || searchable.includes(value);
+      const matchesSearch = !query || searchable.includes(query);
+      return matchesFilter && matchesSearch;
+    });
+  }, [filter, searchQuery]);
 
   return (
     <section className="collection" id="shop">
@@ -233,9 +203,20 @@ function FeaturedCollection({ onOpenProduct }) {
         <p className="eyebrow"><Sparkles size={16} /> Featured collection</p>
         <h2>Guilt-free pasta and rice, positioned for premium shelves.</h2>
         <p>
-          Placeholder products are structured for a health-food ecommerce flow: product cards, options, price ranges, quick categories, and room for future product photography.
+          Product quantities are listed around EveGlo's 150g format with launch pricing aligned to comparable better-for-you pantry products.
         </p>
       </div>
+
+      <label className="collection-search">
+        <Search size={18} />
+        <input
+          type="search"
+          value={searchQuery}
+          placeholder="Search the collection"
+          aria-label="Search the collection"
+          onChange={(event) => onSearchChange(event.target.value)}
+        />
+      </label>
 
       <div className="filter-row" aria-label="Filter products">
         {filters.map((item) => (
@@ -254,6 +235,9 @@ function FeaturedCollection({ onOpenProduct }) {
           <ProductCard key={product.name} product={product} onOpenProduct={onOpenProduct} />
         ))}
       </div>
+      {visibleProducts.length === 0 && (
+        <p className="empty-search">No products matched "{searchQuery}". Try pasta, rice, protein, or shirataki.</p>
+      )}
     </section>
   );
 }
@@ -385,6 +369,10 @@ function AboutPage({ navigate }) {
         more balanced nutrition. Our focus is low-carb rice alternatives, shirataki noodles, and high-protein
         pasta that make everyday meals easier without asking families to give up flavor.
       </p>
+      <p>
+        EveGlo Foods is owned and operated by Harmony Resource Hub Alberta Inc. Learn more at{' '}
+        <a href="https://www.harmonyresourcehub.ca" target="_blank" rel="noreferrer">www.Harmonyresourcehub.ca</a>.
+      </p>
       <div className="content-grid">
         <article>
           <h2>Food-first wellness</h2>
@@ -411,6 +399,35 @@ function AboutPage({ navigate }) {
       <button type="button" className="primary-button" onClick={() => navigate('home', 'shop')}>
         Explore the collection <ArrowRight size={18} />
       </button>
+    </section>
+  );
+}
+
+function UpdatesPage() {
+  return (
+    <section className="content-page updates-page">
+      <p className="eyebrow"><Megaphone size={16} /> Launch updates</p>
+      <h1>Product launch update from our Alberta team.</h1>
+      <article className="announcement-card">
+        <div>
+          <span>Launch notice</span>
+          <time dateTime="2026-04-28">April 28, 2026</time>
+        </div>
+        <h2>EveGlo Foods launch delayed during ongoing Pacdora dispute</h2>
+        <p>
+          EveGlo Foods is temporarily delaying its product launch due to an ongoing dispute with Pacdora,
+          a packaging mockup and dieline platform used by creators and packaging teams.
+        </p>
+        <p>
+          This has been a difficult chapter for a small Alberta team working to bring a new health-focused
+          pantry brand to market. Even with the delay, EveGlo Foods remains committed to protecting the
+          brand, preserving the product vision, and moving forward with care.
+        </p>
+        <p>
+          Further updates and announcements about launch timing, product availability, and next steps will
+          be released in the coming weeks.
+        </p>
+      </article>
     </section>
   );
 }
@@ -515,6 +532,7 @@ function Footer({ navigate }) {
       <div>
         <h4>Company</h4>
         <button type="button" onClick={() => navigate('about')}>About</button>
+        <button type="button" onClick={() => navigate('updates')}>Launch Updates</button>
         <button type="button" onClick={() => navigate('home', 'wholesale')}>Wholesale</button>
         <a href="mailto:Info@EveGlofoods.com">Contact us</a>
         <button type="button" onClick={() => navigate('privacy')}>Privacy Policy</button>
@@ -530,6 +548,7 @@ function Footer({ navigate }) {
 export default function App() {
   const [page, setPage] = useState('home');
   const [activeProduct, setActiveProduct] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const navigate = (nextPage, section) => {
     setPage(nextPage);
@@ -551,14 +570,18 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header navigate={navigate} />
+      <Header navigate={navigate} onSearch={setSearchQuery} />
       <main>
         {page === 'home' && (
           <>
             <Hero navigate={navigate} />
             <CategoryStrip navigate={navigate} />
             <ComingSoon />
-            <FeaturedCollection onOpenProduct={openProduct} />
+            <FeaturedCollection
+              onOpenProduct={openProduct}
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+            />
             <PromoBand navigate={navigate} />
             <Highlights />
             <Testimonials />
@@ -566,6 +589,7 @@ export default function App() {
           </>
         )}
         {page === 'about' && <AboutPage navigate={navigate} />}
+        {page === 'updates' && <UpdatesPage />}
         {page === 'privacy' && <PrivacyPolicyPage />}
         {page === 'product' && <ProductDetail product={activeProduct} navigate={navigate} />}
       </main>
