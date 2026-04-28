@@ -212,47 +212,66 @@ function FeaturedCollection({ onOpenProduct, searchQuery, onSearchChange }) {
     const mobileQuery = window.matchMedia('(max-width: 700px), (hover: none) and (pointer: coarse)');
     if (!mobileQuery.matches) return undefined;
 
-    let frameId;
-    let lastTime = performance.now();
-    const speed = 26;
+    const tickMs = 40;
+    const speed = 34;
+    let intervalId;
+    let resumeTimer;
+    let currentScroll = carousel.scrollLeft;
 
-    const handlePointerDown = () => {
-      isInteractingRef.current = true;
-    };
-    const handlePointerDone = () => {
-      isInteractingRef.current = false;
-    };
-
-    const step = (time) => {
-      const elapsed = time - lastTime;
-      lastTime = time;
-
+    const normalizeLoop = () => {
       const loopPoint = carousel.scrollWidth / 2;
-      if (!isInteractingRef.current && loopPoint > carousel.clientWidth) {
-        carousel.scrollLeft += (speed * elapsed) / 1000;
-        if (carousel.scrollLeft >= loopPoint) {
-          carousel.scrollLeft -= loopPoint;
-        }
-      } else if (carousel.scrollLeft >= loopPoint) {
+      if (loopPoint <= carousel.clientWidth) return;
+
+      if (carousel.scrollLeft >= loopPoint) {
         carousel.scrollLeft -= loopPoint;
       } else if (carousel.scrollLeft <= 0 && isInteractingRef.current) {
         carousel.scrollLeft += loopPoint;
       }
 
-      if (document.visibilityState === 'visible') {
-        frameId = window.requestAnimationFrame(step);
+      currentScroll = carousel.scrollLeft;
+    };
+
+    const handlePointerDown = () => {
+      window.clearTimeout(resumeTimer);
+      isInteractingRef.current = true;
+      currentScroll = carousel.scrollLeft;
+    };
+    const handlePointerDone = () => {
+      currentScroll = carousel.scrollLeft;
+      window.clearTimeout(resumeTimer);
+      resumeTimer = window.setTimeout(() => {
+        isInteractingRef.current = false;
+        currentScroll = carousel.scrollLeft;
+      }, 900);
+    };
+
+    const tick = () => {
+      if (document.visibilityState !== 'visible') return;
+      const loopPoint = carousel.scrollWidth / 2;
+
+      if (!isInteractingRef.current && loopPoint > carousel.clientWidth) {
+        currentScroll += (speed * tickMs) / 1000;
+        if (currentScroll >= loopPoint) {
+          currentScroll -= loopPoint;
+        }
+        carousel.scrollLeft = Math.round(currentScroll);
+        return;
+      }
+
+      if (isInteractingRef.current) {
+        normalizeLoop();
+      }
+    };
+
+    const handleScroll = () => {
+      if (isInteractingRef.current) {
+        currentScroll = carousel.scrollLeft;
       }
     };
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
-        lastTime = performance.now();
-        if (!frameId) {
-          frameId = window.requestAnimationFrame(step);
-        }
-      } else {
-        window.cancelAnimationFrame(frameId);
-        frameId = null;
+        currentScroll = carousel.scrollLeft;
       }
     };
 
@@ -263,11 +282,13 @@ function FeaturedCollection({ onOpenProduct, searchQuery, onSearchChange }) {
     carousel.addEventListener('touchstart', handlePointerDown, { passive: true });
     carousel.addEventListener('touchend', handlePointerDone, { passive: true });
     carousel.addEventListener('touchcancel', handlePointerDone, { passive: true });
+    carousel.addEventListener('scroll', handleScroll, { passive: true });
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    frameId = window.requestAnimationFrame(step);
+    intervalId = window.setInterval(tick, tickMs);
 
     return () => {
-      window.cancelAnimationFrame(frameId);
+      window.clearInterval(intervalId);
+      window.clearTimeout(resumeTimer);
       carousel.removeEventListener('pointerdown', handlePointerDown);
       carousel.removeEventListener('pointerup', handlePointerDone);
       carousel.removeEventListener('pointercancel', handlePointerDone);
@@ -275,6 +296,7 @@ function FeaturedCollection({ onOpenProduct, searchQuery, onSearchChange }) {
       carousel.removeEventListener('touchstart', handlePointerDown);
       carousel.removeEventListener('touchend', handlePointerDone);
       carousel.removeEventListener('touchcancel', handlePointerDone);
+      carousel.removeEventListener('scroll', handleScroll);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [visibleProducts.length]);
