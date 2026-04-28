@@ -20,6 +20,22 @@ const heroImage = {
   alt: 'EveGlo Foods retail product collection mockup'
 };
 
+function FoodCharacter({ variant, className = '' }) {
+  return (
+    <div className={`food-character ${variant} ${className}`} aria-hidden="true">
+      <span className="character-stem" />
+      <span className="character-leaf leaf-left" />
+      <span className="character-leaf leaf-right" />
+      <span className="character-body">
+        <span className="character-face" />
+      </span>
+      <span className="character-arm arm-left" />
+      <span className="character-arm arm-right" />
+      <span className="character-shadow" />
+    </div>
+  );
+}
+
 function Header({ navigate, onSearch }) {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -100,6 +116,7 @@ function Hero({ navigate }) {
               <span>low-carb kitchens.</span>
             </h1>
           </div>
+          <FoodCharacter variant="sprout" className="hero-character" />
         </div>
       </div>
 
@@ -137,6 +154,7 @@ function CategoryStrip({ navigate }) {
 function ComingSoon() {
   return (
     <section className="coming-soon" aria-label="Coming soon announcement">
+      <FoodCharacter variant="rice" className="coming-character" />
       <p className="eyebrow"><Sparkles size={16} /> Coming soon</p>
       <h2>EveGlo Foods is getting ready to glow up your pantry.</h2>
       <p>
@@ -327,6 +345,7 @@ function FeaturedCollection({ onOpenProduct, searchQuery, onSearchChange }) {
   return (
     <section className="collection" id="shop">
       <div className="section-heading">
+        <FoodCharacter variant="noodle" className="collection-character" />
         <p className="eyebrow"><Sparkles size={16} /> Featured collection</p>
         <h2>Guilt-free pasta and rice, positioned for premium shelves.</h2>
         <p>
