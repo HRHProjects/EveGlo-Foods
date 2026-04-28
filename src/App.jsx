@@ -408,7 +408,7 @@ function PromoBand({ navigate }) {
       </figure>
       <div className="promo-copy">
         <p>
-          Add product photos, Shopify links, wholesale forms, nutrition panels, recipe pages, and distributor information while keeping retail and direct-to-customer growth aligned.
+          EveGlo is being prepared for both direct online ordering and retail buyer conversations, with clear product presentation, launch updates, wholesale details, and shelf-ready brand materials.
         </p>
         <button type="button" onClick={() => navigate('home', 'wholesale')}>Start wholesale conversation <ArrowRight size={17} /></button>
       </div>
