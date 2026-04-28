@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowRight,
   Check,
@@ -148,9 +148,9 @@ function ComingSoon() {
   );
 }
 
-function ProductCard({ product, onOpenProduct }) {
+function ProductCard({ product, onOpenProduct, className = '' }) {
   return (
-    <article className={`product-card accent-${product.accent}`}>
+    <article className={`product-card accent-${product.accent} ${className}`}>
       <button
         type="button"
         className="product-card-link"
@@ -183,6 +183,8 @@ function ProductCard({ product, onOpenProduct }) {
 
 function FeaturedCollection({ onOpenProduct, searchQuery, onSearchChange }) {
   const [filter, setFilter] = useState('All');
+  const carouselRef = useRef(null);
+  const isInteractingRef = useRef(false);
   const filters = ['All', 'Low carb', 'High protein', 'Rice', 'Pasta'];
 
   const visibleProducts = useMemo(() => {
@@ -202,6 +204,54 @@ function FeaturedCollection({ onOpenProduct, searchQuery, onSearchChange }) {
       return matchesFilter && matchesSearch;
     });
   }, [filter, searchQuery]);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel || visibleProducts.length === 0) return undefined;
+
+    const mobileQuery = window.matchMedia('(max-width: 700px)');
+    if (!mobileQuery.matches) return undefined;
+
+    let frameId;
+    let lastTime = performance.now();
+    const speed = 18;
+
+    const handlePointerDown = () => {
+      isInteractingRef.current = true;
+    };
+    const handlePointerDone = () => {
+      isInteractingRef.current = false;
+    };
+
+    const step = (time) => {
+      const elapsed = time - lastTime;
+      lastTime = time;
+
+      if (!isInteractingRef.current && carousel.scrollWidth > carousel.clientWidth) {
+        carousel.scrollLeft += (speed * elapsed) / 1000;
+        const midpoint = carousel.scrollWidth / 2;
+        if (carousel.scrollLeft >= midpoint) {
+          carousel.scrollLeft -= midpoint;
+        }
+      }
+
+      frameId = window.requestAnimationFrame(step);
+    };
+
+    carousel.addEventListener('pointerdown', handlePointerDown);
+    carousel.addEventListener('pointerup', handlePointerDone);
+    carousel.addEventListener('pointercancel', handlePointerDone);
+    carousel.addEventListener('pointerleave', handlePointerDone);
+    frameId = window.requestAnimationFrame(step);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      carousel.removeEventListener('pointerdown', handlePointerDown);
+      carousel.removeEventListener('pointerup', handlePointerDone);
+      carousel.removeEventListener('pointercancel', handlePointerDone);
+      carousel.removeEventListener('pointerleave', handlePointerDone);
+    };
+  }, [visibleProducts.length]);
 
   return (
     <section className="collection" id="shop">
@@ -236,9 +286,17 @@ function FeaturedCollection({ onOpenProduct, searchQuery, onSearchChange }) {
         ))}
       </div>
 
-      <div className="product-grid">
+      <div className="product-grid" ref={carouselRef}>
         {visibleProducts.map((product) => (
           <ProductCard key={product.name} product={product} onOpenProduct={onOpenProduct} />
+        ))}
+        {visibleProducts.map((product) => (
+          <ProductCard
+            key={`${product.name}-mobile-loop`}
+            product={product}
+            onOpenProduct={onOpenProduct}
+            className="mobile-loop-card"
+          />
         ))}
       </div>
       {visibleProducts.length === 0 && (
