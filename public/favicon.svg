@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="EveGlo E leaf icon">
+  <rect width="64" height="64" rx="14" fill="#fbfff7"/>
+  <path d="M18 14h31v9H29v8h17v9H29v10h21v9H18V14z" fill="#159631"/>
+  <path d="M37 15c3.2-7.5 10.5-10.3 18-9.6-1 7.7-5.4 13.6-13.6 15.2-3.1.6-5.9.2-8.3-1.1 1.2-1.5 2.5-3 3.9-4.5z" fill="#2ed44f"/>
+  <path d="M36 20c3.9-5.7 8.8-8.8 15.5-10.7" fill="none" stroke="#fbfff7" stroke-width="3" stroke-linecap="round"/>
+</svg>
