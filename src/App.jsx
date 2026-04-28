@@ -13,7 +13,7 @@ import {
   Truck,
   X
 } from 'lucide-react';
-import { departments, highlights, products, testimonials } from './productData.js';
+import { departments, highlights, konjacFacts, products } from './productData.js';
 
 const heroImage = {
   image: '/assets/hero-gallery/collection-mockup-5.png',
@@ -430,17 +430,34 @@ function Highlights() {
   );
 }
 
-function Testimonials() {
+function KonjacFacts() {
+  const [activeFact, setActiveFact] = useState(konjacFacts[0]?.title || '');
+
   return (
-    <section className="testimonials">
+    <section className="konjac-section">
       <div className="section-heading compact">
-        <p className="eyebrow">Customer notes</p>
-        <h2>Designed to make the product feel credible before photography is ready.</h2>
+        <p className="eyebrow"><Leaf size={16} /> Konjac facts</p>
+        <h2>Why konjac makes lighter comfort food worth trying.</h2>
       </div>
-      <div className="testimonial-grid">
-        {testimonials.map((quote) => (
-          <blockquote key={quote}>"{quote}"</blockquote>
-        ))}
+      <div className="konjac-layout">
+        <figure className="konjac-frame">
+          <img src="/assets/konjac-mockup.png" alt="Konjac product mockup for EveGlo Foods" />
+        </figure>
+        <div className="konjac-facts" aria-label="Konjac facts">
+          {konjacFacts.map((fact) => (
+            <button
+              type="button"
+              key={fact.title}
+              className={`konjac-fact ${activeFact === fact.title ? 'is-active' : ''}`}
+              onClick={() => setActiveFact(fact.title)}
+              onFocus={() => setActiveFact(fact.title)}
+            >
+              <span>{fact.kicker}</span>
+              <strong>{fact.title}</strong>
+              <em>{fact.detail}</em>
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -769,7 +786,7 @@ export default function App() {
             />
             <PromoBand navigate={navigate} />
             <Highlights />
-            <Testimonials />
+            <KonjacFacts />
             <Wholesale />
           </>
         )}

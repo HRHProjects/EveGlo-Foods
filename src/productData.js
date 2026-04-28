@@ -151,8 +151,25 @@ export const highlights = [
   }
 ];
 
-export const testimonials = [
-  'Finally, a pantry brand that feels premium but still practical for weekly meals.',
-  'The rice and noodle range gives our household more flexible low-carb dinner options.',
-  'Clean branding, clear nutrition positioning, and products that make sense on shelf.'
+export const konjacFacts = [
+  {
+    kicker: '01',
+    title: 'Made from a root',
+    detail: 'Konjac comes from a plant root that has been used in Asian cooking for generations.'
+  },
+  {
+    kicker: '02',
+    title: 'Naturally lighter',
+    detail: 'Konjac noodles and rice are known for being low in carbohydrates and light on calories.'
+  },
+  {
+    kicker: '03',
+    title: 'Takes on flavor',
+    detail: 'Its mild taste makes it easy to pair with sauces, broths, stir-fries, curries, and everyday meals.'
+  },
+  {
+    kicker: '04',
+    title: 'Fast pantry swap',
+    detail: 'It gives pasta and rice lovers a simple way to build familiar comfort meals with a lighter base.'
+  }
 ];

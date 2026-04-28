@@ -491,7 +491,7 @@ h1, h2, h3 {
   font-weight: 900;
 }
 
-.collection, .testimonials {
+.collection, .konjac-section {
   max-width: 1240px;
   margin: 0 auto;
   padding: 20px 22px 76px;
@@ -743,20 +743,116 @@ h1, h2, h3 {
 .highlights h3 { margin: 18px 0 12px; font-size: 1.5rem; letter-spacing: 0; }
 .highlights p { margin: 0; color: var(--muted); line-height: 1.65; }
 
-.testimonial-grid {
+.konjac-layout {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: minmax(280px, 0.78fr) 1fr;
+  gap: clamp(22px, 4vw, 46px);
+  align-items: center;
 }
-blockquote {
+.konjac-frame {
+  position: relative;
   margin: 0;
-  padding: 28px;
-  border-radius: 28px;
-  background: var(--white);
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(46, 212, 79, 0.24);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 215, 25, 0.34), transparent 24%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(223, 249, 230, 0.72));
+  box-shadow: 0 24px 62px rgba(34, 36, 41, 0.1);
+}
+.konjac-frame::before {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(21, 150, 49, 0.18);
+  border-radius: 26px;
+  pointer-events: none;
+}
+.konjac-frame::after {
+  content: 'Konjac';
+  position: absolute;
+  right: 24px;
+  bottom: 20px;
+  color: rgba(21, 150, 49, 0.16);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  font-weight: 850;
+  line-height: 1;
+}
+.konjac-frame img {
+  position: relative;
+  z-index: 2;
+  width: min(88%, 430px);
+  max-height: 380px;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 34px rgba(34, 36, 41, 0.22));
+}
+.konjac-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.konjac-fact {
+  min-height: 184px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  overflow: hidden;
+  padding: 22px;
   border: 1px solid var(--line);
-  color: #414741;
-  line-height: 1.68;
-  font-weight: 750;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.82)),
+    var(--white);
+  color: var(--charcoal);
+  text-align: left;
+  box-shadow: 0 14px 38px rgba(34, 36, 41, 0.07);
+  transform: translateY(0);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+.konjac-fact span {
+  width: max-content;
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+.konjac-fact strong {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  line-height: 1.08;
+}
+.konjac-fact em {
+  display: block;
+  max-height: 0;
+  color: var(--muted);
+  font-style: normal;
+  line-height: 1.58;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: max-height 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
+}
+.konjac-fact:hover,
+.konjac-fact:focus-visible,
+.konjac-fact.is-active {
+  border-color: rgba(46, 212, 79, 0.42);
+  background:
+    radial-gradient(circle at 92% 16%, rgba(255, 215, 25, 0.32), transparent 28%),
+    linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(223, 249, 230, 0.92));
+  box-shadow: 0 24px 58px rgba(34, 36, 41, 0.13);
+  transform: translateY(-6px);
+}
+.konjac-fact:hover em,
+.konjac-fact:focus-visible em,
+.konjac-fact.is-active em {
+  max-height: 120px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .wholesale {
@@ -1047,9 +1143,10 @@ blockquote {
   .nav-links.is-open { display: flex; }
   .site-search { margin-bottom: 14px; }
   .category-strip, .product-grid { grid-template-columns: repeat(2, 1fr); }
-  .content-grid, .detail-layout { grid-template-columns: 1fr; }
+  .content-grid, .detail-layout, .konjac-layout { grid-template-columns: 1fr; }
   .detail-pack { min-height: 360px; }
   .promo-band, .wholesale { grid-template-columns: 1fr; }
+  .konjac-frame { min-height: 360px; }
 }
 
 @media (max-width: 700px) {
@@ -1263,7 +1360,7 @@ blockquote {
   .section-heading {
     padding-right: 64px;
   }
-  .collection, .testimonials {
+  .collection, .konjac-section {
     padding: 16px 16px 56px;
   }
   .collection-search {
@@ -1314,9 +1411,50 @@ blockquote {
     padding: 28px 20px;
     border-radius: 28px;
   }
-  .highlights, .testimonial-grid, .footer { grid-template-columns: 1fr; }
+  .highlights, .konjac-facts, .footer { grid-template-columns: 1fr; }
   .highlights {
     padding: 0 16px 56px;
+  }
+  .konjac-layout {
+    gap: 18px;
+  }
+  .konjac-frame {
+    min-height: 300px;
+    border-radius: 28px;
+  }
+  .konjac-frame::before {
+    inset: 12px;
+    border-radius: 22px;
+  }
+  .konjac-frame::after {
+    right: 18px;
+    bottom: 16px;
+    font-size: 3.3rem;
+  }
+  .konjac-frame img {
+    width: min(88%, 330px);
+    max-height: 270px;
+  }
+  .konjac-fact {
+    min-height: 0;
+    padding: 20px;
+    border-radius: 22px;
+  }
+  .konjac-fact strong {
+    font-size: 1.38rem;
+  }
+  .konjac-fact em {
+    max-height: 120px;
+    opacity: 1;
+    transform: none;
+  }
+  .konjac-fact:not(.is-active) em {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .konjac-fact.is-active {
+    transform: translateY(-3px);
   }
   .content-page, .detail-page { padding-top: 42px; }
   .footer {
