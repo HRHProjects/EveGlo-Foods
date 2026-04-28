@@ -401,11 +401,14 @@ function PromoBand({ navigate }) {
     <section className="promo-band">
       <div>
         <p className="eyebrow"><Truck size={16} /> Retail ready</p>
-        <h2>Built for ecommerce now and grocery expansion later.</h2>
+        <h2>Built for online orders and grocery shelves from day one.</h2>
       </div>
+      <figure className="promo-photo">
+        <img src="/assets/eveglo-product-in-box.jpg" alt="EveGlo Foods product displayed in a branded shipping box" />
+      </figure>
       <div className="promo-copy">
         <p>
-          Add product photos, Shopify links, wholesale forms, nutrition panels, recipe pages, and distributor information without rebuilding the site structure.
+          Add product photos, Shopify links, wholesale forms, nutrition panels, recipe pages, and distributor information while keeping retail and direct-to-customer growth aligned.
         </p>
         <button type="button" onClick={() => navigate('home', 'wholesale')}>Start wholesale conversation <ArrowRight size={17} /></button>
       </div>
