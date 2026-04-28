@@ -1156,66 +1156,7 @@ blockquote {
     letter-spacing: 0;
   }
   .food-character {
-    width: 68px;
-    height: 84px;
-  }
-  .character-body {
-    left: 9px;
-    top: 20px;
-    width: 50px;
-    height: 58px;
-    border-width: 3px;
-  }
-  .character-body::after {
-    left: 18px;
-    top: 34px;
-    width: 13px;
-  }
-  .character-face {
-    top: 29px;
-    width: 28px;
-  }
-  .character-face::before,
-  .character-face::after {
-    width: 5px;
-    height: 5px;
-  }
-  .character-stem {
-    left: 31px;
-    top: 5px;
-    width: 6px;
-    height: 22px;
-  }
-  .character-leaf {
-    top: 7px;
-    width: 25px;
-    height: 15px;
-  }
-  .leaf-left { left: 14px; }
-  .leaf-right { right: 13px; }
-  .character-arm {
-    top: 44px;
-    width: 21px;
-    height: 6px;
-  }
-  .character-shadow {
-    left: 14px;
-    width: 42px;
-    height: 9px;
-  }
-  .hero-character {
-    right: 12px;
-    bottom: 92px;
-    opacity: 0.92;
-  }
-  .coming-character {
-    top: -10px;
-    right: 12px;
-  }
-  .collection-character {
-    top: -14px;
-    right: 0;
-    opacity: 0.9;
+    display: none;
   }
   .collection, .testimonials {
     padding: 16px 16px 56px;
