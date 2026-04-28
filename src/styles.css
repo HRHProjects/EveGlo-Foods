@@ -1061,27 +1061,33 @@ blockquote {
     top: 76px;
     border-radius: 22px;
   }
-  .hero { padding-bottom: 24px; }
+  .hero { padding-bottom: 14px; }
   .hero h1 {
-    max-width: 330px;
-    font-size: clamp(1.9rem, 8.3vw, 2.75rem);
-    line-height: 1.02;
+    max-width: none;
+    font-size: clamp(1.65rem, 7vw, 2.25rem);
+    line-height: 1.08;
   }
-  .hero h1 span:nth-child(2) { margin-left: 8px; }
-  .hero-visual, .hero-image-frame, .hero-image-frame img { min-height: 58svh; }
+  .hero h1 span {
+    display: inline;
+  }
+  .hero h1 span:not(:last-child)::after {
+    content: ' ';
+  }
+  .hero h1 span:nth-child(2) { margin-left: 0; }
+  .hero-visual, .hero-image-frame, .hero-image-frame img { min-height: 46svh; }
   .hero-image-frame::after {
     background:
       linear-gradient(0deg, rgba(251, 255, 247, 0.9) 0%, rgba(251, 255, 247, 0.54) 36%, rgba(251, 255, 247, 0) 70%);
   }
   .hero-title-panel {
     left: 16px;
-    right: 92px;
-    bottom: 20px;
-    width: min(330px, calc(100% - 112px));
-    max-width: 330px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+    max-width: none;
   }
   .hero-title-panel .eyebrow {
-    max-width: 230px;
+    max-width: none;
     margin-bottom: 10px;
     font-size: 0.68rem;
     line-height: 1.2;
@@ -1222,8 +1228,9 @@ blockquote {
     height: 8px;
   }
   .hero-character {
-    right: 18px;
-    bottom: 24px;
+    right: 14px;
+    top: 86px;
+    bottom: auto;
     transform: rotate(7deg);
   }
   .coming-character {
