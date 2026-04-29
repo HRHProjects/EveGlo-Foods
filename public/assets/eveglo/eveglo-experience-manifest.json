@@ -1,0 +1,405 @@
+{
+  "schemaVersion": "1.0.0",
+  "experienceName": "EveGlo Shelf-to-Plate Signature Hero",
+  "purpose": "A premium, interactive website experience that turns the real shipping-carton product photo into a polished consumer-brand story.",
+  "recommendedPlacement": {
+    "primary": "Homepage hero, above the fold",
+    "secondary": "Product detail page directly below the main product image",
+    "mobileBehavior": "Use vertical story cards with swipe/scroll progression instead of horizontal parallax."
+  },
+  "assetMap": {
+    "basePath": "/assets/eveglo/",
+    "images": {
+      "realCartonProof": "eveglo-product-in-box.jpg",
+      "premiumHeroStill": "fresh-and-natural-rice-indulgence.png",
+      "frontPanelMacro": "eveglo-front.jpg",
+      "backPanelMacro": "eveglo-back.jpg",
+      "flatCartonBlueprint": "eveglo-flat-carton.jpg"
+    },
+    "uploadInstructions": [
+      "Rename the product-in-box photo to eveglo-product-in-box.jpg.",
+      "Rename the polished hero image to fresh-and-natural-rice-indulgence.png.",
+      "Rename the front close-up to eveglo-front.jpg.",
+      "Rename the back close-up to eveglo-back.jpg.",
+      "Rename the unfolded box photo to eveglo-flat-carton.jpg.",
+      "Place all files in /public/assets/eveglo/ for Vite/React or /assets/eveglo/ for static HTML."
+    ]
+  },
+  "brandSystem": {
+    "brandName": "EveGlō Foods",
+    "productName": "Instant Shirataki Rice",
+    "productNameFrench": "Riz shirataki instantané",
+    "tagline": "Taste The Glow of Nature",
+    "taglineFrench": "Goûtez l’éclat de la nature",
+    "visualMood": [
+      "fresh",
+      "clean",
+      "premium",
+      "natural",
+      "retail-ready",
+      "Canadian-owned"
+    ],
+    "palette": {
+      "deepTeal": "#0E6F80",
+      "packageBlue": "#1788A3",
+      "freshGreen": "#78BF2D",
+      "leafGreen": "#3FA34D",
+      "warmYellow": "#E2C300",
+      "softStone": "#F3EFE7",
+      "ink": "#1E2528"
+    }
+  },
+  "signatureModules": [
+    {
+      "id": "realityToRetailHero",
+      "name": "Reality-to-Retail Reveal",
+      "whyItIsDifferent": "Most food sites only show polished mockups. This begins with the real carton full of product, then reveals the premium studio product image.",
+      "type": "beforeAfterReveal",
+      "assets": {
+        "before": "realCartonProof",
+        "after": "premiumHeroStill"
+      },
+      "copy": {
+        "eyebrow": "Real product. Retail-ready presentation.",
+        "headline": "From packed cartons to a polished pantry staple.",
+        "subheadline": "EveGlō Instant Shirataki Rice brings a clean, modern low-calorie rice alternative into a format that feels ready for today’s grocery shelf.",
+        "ctaPrimary": "Explore the product",
+        "ctaSecondary": "See the package details"
+      },
+      "interaction": {
+        "desktop": "Mouse movement or drag handle controls a diagonal wipe from carton photo to premium hero still.",
+        "mobile": "Auto-play a slow 2.5 second reveal once, then allow thumb drag.",
+        "motion": {
+          "durationMs": 2500,
+          "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "overlayGradient": "linear-gradient(110deg, rgba(14,111,128,0.55), rgba(120,191,45,0.20))"
+        }
+      }
+    },
+    {
+      "id": "livingPackageHotspots",
+      "name": "Living Package Hotspots",
+      "whyItIsDifferent": "The product box becomes navigation. Visitors click the actual claims and package details to learn more.",
+      "type": "imageHotspotMap",
+      "asset": "frontPanelMacro",
+      "hotspots": [
+        {
+          "id": "calories",
+          "label": "35 Calories",
+          "xPercent": 54,
+          "yPercent": 72,
+          "pinStyle": "softPulse",
+          "panelTitle": "35 calories per serving",
+          "panelBody": "A light rice-style option for bowls, soups, stir-fries, risottos, and everyday meals.",
+          "microAnimation": "numberCountUp"
+        },
+        {
+          "id": "carbs",
+          "label": "7g Carbohydrate",
+          "xPercent": 54,
+          "yPercent": 65,
+          "pinStyle": "softPulse",
+          "panelTitle": "7g carbohydrate per 50g serving",
+          "panelBody": "Simple front-of-pack nutrition communication for quick shopper decisions.",
+          "microAnimation": "blueLabelGlow"
+        },
+        {
+          "id": "bilingual",
+          "label": "Bilingual package",
+          "xPercent": 52,
+          "yPercent": 25,
+          "pinStyle": "lineDraw",
+          "panelTitle": "English and French product naming",
+          "panelBody": "The package is built for a Canadian retail environment with clear bilingual front-facing copy.",
+          "microAnimation": "textSlideDualLanguage"
+        },
+        {
+          "id": "dietaryIcons",
+          "label": "Trust icons",
+          "xPercent": 80,
+          "yPercent": 88,
+          "pinStyle": "softPulse",
+          "panelTitle": "Vegan, halal, and GMO-free positioning",
+          "panelBody": "Fast-recognition trust cues appear without overcrowding the front panel.",
+          "microAnimation": "iconOrbit"
+        },
+        {
+          "id": "riceWindow",
+          "label": "Rice-style texture",
+          "xPercent": 50,
+          "yPercent": 47,
+          "pinStyle": "ringTrace",
+          "panelTitle": "A rice-like visual texture",
+          "panelBody": "The central window area gives shoppers an immediate sense of the product texture and use case.",
+          "microAnimation": "grainDrift"
+        }
+      ]
+    },
+    {
+      "id": "packageBlueprintMode",
+      "name": "Package Blueprint Mode",
+      "whyItIsDifferent": "A hidden blueprint view makes the box feel engineered, not accidental, and shows retailer readiness.",
+      "type": "togglePanel",
+      "asset": "flatCartonBlueprint",
+      "copy": {
+        "headline": "Designed as a real retail carton, not just a mockup.",
+        "body": "Open the blueprint view to see the carton structure, barcode area, bilingual front panel, nutrition communication, and package layout logic."
+      },
+      "panels": [
+        {
+          "id": "frontPanel",
+          "label": "Front panel",
+          "xPercent": 58,
+          "yPercent": 25,
+          "note": "Main shopper-facing story: product name, rice visual, nutrition callouts, and dietary icons."
+        },
+        {
+          "id": "barcodeArea",
+          "label": "Barcode area",
+          "xPercent": 42,
+          "yPercent": 78,
+          "note": "Retail-use placement that supports scanning and shelf operations."
+        },
+        {
+          "id": "sideInstructions",
+          "label": "Side panel instructions",
+          "xPercent": 14,
+          "yPercent": 33,
+          "note": "Compact preparation and product information area for side-shelf review."
+        }
+      ]
+    },
+    {
+      "id": "ingredientTheater",
+      "name": "Ingredient Theater",
+      "whyItIsDifferent": "Instead of a basic ingredient list, this creates a visual connection between konjac root, rice-style texture, and the finished product.",
+      "type": "cinematicIngredientCards",
+      "cards": [
+        {
+          "title": "Konjac root foundation",
+          "body": "A plant-based base that supports the shirataki rice identity.",
+          "visualCue": "konjac root on stone plate",
+          "motion": "slow parallax left"
+        },
+        {
+          "title": "Rice-style texture",
+          "body": "A familiar grain-like experience for bowls, soups, stir-fries, and sauced dishes.",
+          "visualCue": "white rice grains close-up",
+          "motion": "grain shimmer"
+        },
+        {
+          "title": "Fast pantry use",
+          "body": "An instant format designed for quick meals without losing a clean product story.",
+          "visualCue": "box rotates into front view",
+          "motion": "subtle 3D tilt"
+        }
+      ]
+    },
+    {
+      "id": "bilingualGlowSwitch",
+      "name": "Bilingual Glow Switch",
+      "whyItIsDifferent": "The site can switch product callouts between English, French, and bilingual mode without changing the layout.",
+      "type": "languageModeSwitcher",
+      "defaultMode": "bilingual",
+      "modes": {
+        "english": {
+          "heroHeadline": "Instant Shirataki Rice for lighter everyday meals.",
+          "heroSubcopy": "A rice-style, plant-based pantry option with 35 calories and 7g carbohydrate per 50g serving.",
+          "shopperPrompt": "Build a bowl. Stir into soup. Serve with your favourite sauce."
+        },
+        "french": {
+          "heroHeadline": "Riz shirataki instantané pour des repas plus légers au quotidien.",
+          "heroSubcopy": "Une option de garde-manger à texture de riz, avec 35 calories et 7 g de glucides par portion de 50 g.",
+          "shopperPrompt": "Préparez un bol, ajoutez-le à une soupe ou servez-le avec votre sauce préférée."
+        },
+        "bilingual": {
+          "heroHeadline": "Instant Shirataki Rice / Riz shirataki instantané",
+          "heroSubcopy": "A clean, rice-style pantry option designed for Canadian shelves and everyday meals.",
+          "shopperPrompt": "Taste The Glow of Nature / Goûtez l’éclat de la nature"
+        }
+      }
+    },
+    {
+      "id": "scanStoryCard",
+      "name": "Scan Story Card",
+      "whyItIsDifferent": "The QR area on the back panel becomes a digital product bridge for recipes, preparation videos, retailer information, and product updates.",
+      "type": "qrInspiredCard",
+      "asset": "backPanelMacro",
+      "copy": {
+        "headline": "The package continues online.",
+        "body": "Use this section for recipes, preparation videos, retailer information, and product updates connected to the physical package experience.",
+        "cta": "Open recipe ideas"
+      },
+      "interaction": {
+        "hoverEffect": "QR edge light sweep",
+        "clickAction": "scrollToRecipes",
+        "mobileAction": "openRecipeDrawer"
+      }
+    }
+  ],
+  "scrollNarrative": {
+    "id": "shelfToPlateScroll",
+    "style": "sticky product stage with text chapters",
+    "chapters": [
+      {
+        "index": 1,
+        "triggerPercent": 0,
+        "headline": "First, prove it is real.",
+        "body": "Start with the actual carton photo so visitors see packed product, not only a render.",
+        "activeAsset": "realCartonProof",
+        "stageEffect": "cartonGridZoom"
+      },
+      {
+        "index": 2,
+        "triggerPercent": 20,
+        "headline": "Then elevate it.",
+        "body": "Reveal the polished studio hero image to move from operational proof to consumer desire.",
+        "activeAsset": "premiumHeroStill",
+        "stageEffect": "diagonalWipeReveal"
+      },
+      {
+        "index": 3,
+        "triggerPercent": 45,
+        "headline": "Let the box speak.",
+        "body": "Use front-panel hotspots for calories, carbohydrate, bilingual naming, dietary icons, and texture cues.",
+        "activeAsset": "frontPanelMacro",
+        "stageEffect": "hotspotPulseSequence"
+      },
+      {
+        "index": 4,
+        "triggerPercent": 70,
+        "headline": "Show the retail thinking.",
+        "body": "Open the carton blueprint view to make the packaging look intentional, practical, and shelf-ready.",
+        "activeAsset": "flatCartonBlueprint",
+        "stageEffect": "blueprintOverlay"
+      },
+      {
+        "index": 5,
+        "triggerPercent": 90,
+        "headline": "Finish with the meal idea.",
+        "body": "Move visitors toward recipes, retailers, and a product inquiry form.",
+        "activeAsset": "premiumHeroStill",
+        "stageEffect": "softGlowCTA"
+      }
+    ]
+  },
+  "microInteractions": {
+    "riceGrainDrift": {
+      "description": "Small semi-transparent rice-grain shapes drift subtly near the product image. Keep them sparse so it feels premium, not gimmicky.",
+      "countDesktop": 18,
+      "countMobile": 7,
+      "speed": "very slow",
+      "opacityRange": [
+        0.08,
+        0.22
+      ]
+    },
+    "leafBreath": {
+      "description": "Background leaves scale by 1-2% over 8 seconds to create a quiet living-food effect.",
+      "durationMs": 8000,
+      "scaleRange": [
+        1,
+        1.02
+      ]
+    },
+    "boxTilt": {
+      "description": "The main product image tilts gently toward the cursor. Disable on mobile.",
+      "maxRotationDeg": 3.5,
+      "maxTranslatePx": 10,
+      "shadowBoost": true
+    },
+    "claimGlow": {
+      "description": "Nutrition callouts glow only when scrolled into view or hovered, not constantly.",
+      "glowColor": "rgba(23,136,163,0.35)",
+      "durationMs": 900
+    }
+  },
+  "trustAndRetailBlocks": [
+    {
+      "title": "Bilingual Canadian package",
+      "body": "Front-facing English and French product naming supports Canadian retail presentation."
+    },
+    {
+      "title": "Clear nutrition callouts",
+      "body": "35 calories and 7g carbohydrate per 50g serving are visible at a glance."
+    },
+    {
+      "title": "Recognizable dietary signals",
+      "body": "GMO-free, vegan, and halal cues are placed where shoppers can quickly see them."
+    },
+    {
+      "title": "Real packed inventory",
+      "body": "The carton image can be used as a quiet proof point that the product exists beyond concept visuals."
+    }
+  ],
+  "recipeBridge": {
+    "sectionTitle": "Built for bowls, soups, stir-fries, risottos, and sauces.",
+    "cards": [
+      {
+        "title": "Saucy dinner bowl",
+        "pairing": "Tomato, herbs, roasted vegetables",
+        "tone": "comfort-food"
+      },
+      {
+        "title": "Quick stir-fry base",
+        "pairing": "Garlic, ginger, green onion, sesame-style sauce",
+        "tone": "weeknight"
+      },
+      {
+        "title": "Light soup add-in",
+        "pairing": "Broth, mushrooms, spinach, chili oil",
+        "tone": "clean and warm"
+      },
+      {
+        "title": "Creamy risotto-style plate",
+        "pairing": "Mushrooms, parmesan-style topping, parsley",
+        "tone": "premium"
+      }
+    ]
+  },
+  "seoJsonLdTemplate": {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "EveGlō Instant Shirataki Rice",
+    "brand": {
+      "@type": "Brand",
+      "name": "EveGlō Foods"
+    },
+    "description": "EveGlō Instant Shirataki Rice is a rice-style pantry option with 35 calories and 7g carbohydrate per 50g serving.",
+    "image": "/assets/eveglo/fresh-and-natural-rice-indulgence.png",
+    "category": "Food product",
+    "weight": "150 g",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Calories",
+        "value": "35 per 50g serving"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Carbohydrate",
+        "value": "7g per 50g serving"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Dietary positioning",
+        "value": "Vegan, halal, GMO-free"
+      }
+    ]
+  },
+  "developerNotes": {
+    "recommendedLibraries": [
+      "React",
+      "Framer Motion",
+      "GSAP ScrollTrigger or native IntersectionObserver",
+      "CSS mask-image for the reveal wipe"
+    ],
+    "performanceRules": [
+      "Serve the hero image as WebP if possible, with PNG/JPG fallback.",
+      "Lazy-load backPanelMacro and flatCartonBlueprint below the fold.",
+      "Respect prefers-reduced-motion and replace parallax with fades.",
+      "Keep all text as real HTML, not baked into new images, except the packaging itself."
+    ],
+    "codexPrompt": "Build a React/Vite website section that reads /assets/eveglo/eveglo-experience-manifest.json and renders the EveGlo Shelf-to-Plate Signature Hero. Implement the Reality-to-Retail diagonal before/after reveal, product hotspots, scroll narrative, blueprint toggle, bilingual switch, and subtle rice-grain/leaf micro-animations. Use the assetMap paths from the JSON. Make it responsive, premium, fast, and accessible. Keep the visual style clean, teal/green, natural, and retail-ready."
+  }
+}
