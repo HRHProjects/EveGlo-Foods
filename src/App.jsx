@@ -14,11 +14,60 @@ import {
   X
 } from 'lucide-react';
 import { departments, highlights, konjacFacts, products } from './productData.js';
+import glowFinderEngine from './glowFinderProductEngine.json';
 
 const heroImage = {
   image: '/assets/hero-gallery/collection-mockup-5.png',
   alt: 'EveGlo Foods retail product collection mockup'
 };
+
+const glowLocale = 'en-CA';
+const glowProducts = glowFinderEngine.products;
+const glowQuestions = glowFinderEngine.ui.questions;
+
+function textFor(value) {
+  const raw = typeof value === 'string' ? value : value?.[glowLocale] || value?.['en-CA'] || '';
+  return raw
+    .replaceAll('EveGlÅ', 'EveGlo')
+    .replaceAll('â€™', "'")
+    .replaceAll('â€“', '-')
+    .replaceAll('Ã©', 'e')
+    .replaceAll('Ã¨', 'e')
+    .replaceAll('Ã¢', 'a')
+    .replaceAll('Ã´', 'o')
+    .replaceAll('Ã»', 'u');
+}
+
+function formatNutrition(product) {
+  const parts = [];
+  if (product.nutrition?.calories) parts.push(`${product.nutrition.calories} calories`);
+  if (product.nutrition?.proteinG) parts.push(`${product.nutrition.proteinG}g protein`);
+  if (product.nutrition?.netCarbsG) parts.push(`${product.nutrition.netCarbsG}g net carbs`);
+  if (product.nutrition?.carbohydrateG) parts.push(`${product.nutrition.carbohydrateG}g carbohydrate`);
+  return parts.slice(0, 3);
+}
+
+function scoreGlowProducts(answers) {
+  return glowProducts
+    .map((product) => {
+      const score = glowFinderEngine.scoringModel.rules.reduce((total, rule) => {
+        const matches = Object.entries(rule.when).every(([questionId, answerId]) => answers[questionId] === answerId);
+        return total + (matches ? rule.add[product.id] || 0 : 0);
+      }, 0);
+      const exactShapeBonus = answers.shape && answers.shape !== 'surprise' && product.format === answers.shape ? 3 : 0;
+      const tagBonus = Object.values(answers).filter(Boolean).reduce((total, answer) => (
+        product.tags?.includes(answer) ? total + 1 : total
+      ), 0);
+      return { product, score: score + exactShapeBonus + tagBonus };
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      const aQuick = a.product.tags?.includes('quick_meal') ? 1 : 0;
+      const bQuick = b.product.tags?.includes('quick_meal') ? 1 : 0;
+      if (bQuick !== aQuick) return bQuick - aQuick;
+      return textFor(a.product.name).localeCompare(textFor(b.product.name));
+    });
+}
 
 function FoodCharacter({ variant, className = '' }) {
   return (
@@ -162,6 +211,112 @@ function ComingSoon() {
         Fresh product details, ordering, recipes, and wholesale updates are on the way.
       </p>
       <a href="mailto:Info@EveGlofoods.com">Contact us for launch updates <ArrowRight size={17} /></a>
+    </section>
+  );
+}
+
+function GlowFinder({ navigate }) {
+  const defaultAnswers = useMemo(() => Object.fromEntries(
+    glowQuestions.map((question) => [question.id, question.options[0]?.id || ''])
+  ), []);
+  const [answers, setAnswers] = useState(defaultAnswers);
+
+  const scoredProducts = useMemo(() => scoreGlowProducts(answers), [answers]);
+  const bestMatch = scoredProducts[0]?.product;
+  const alternates = scoredProducts.slice(1, 3).map((item) => item.product);
+  const selectedValues = Object.values(answers);
+  const bundle = glowFinderEngine.bundles.find((item) => (
+    item.bestFor.some((tag) => selectedValues.includes(tag)) ||
+    item.products.includes(bestMatch?.id)
+  )) || glowFinderEngine.bundles[0];
+  const recipes = glowFinderEngine.recipePairings.filter((recipe) => (
+    recipe.productId === bestMatch?.id || recipe.tags.some((tag) => selectedValues.includes(tag))
+  )).slice(0, 3);
+
+  const updateAnswer = (questionId, optionId) => {
+    setAnswers((current) => ({ ...current, [questionId]: optionId }));
+  };
+
+  return (
+    <section className="glow-finder" id="glow-finder">
+      <div className="glow-finder-intro">
+        <p className="eyebrow"><Sparkles size={16} /> {textFor(glowFinderEngine.ui.entry.eyebrow)}</p>
+        <h2>{textFor(glowFinderEngine.ui.entry.headline)}</h2>
+        <p>{textFor(glowFinderEngine.ui.entry.body)}</p>
+      </div>
+
+      <div className="glow-finder-shell">
+        <div className="glow-quiz" aria-label="Glow Finder questions">
+          {glowQuestions.map((question, index) => (
+            <fieldset className="glow-question" key={question.id}>
+              <legend>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                {textFor(question.label)}
+              </legend>
+              <div className="glow-options">
+                {question.options.map((option) => (
+                  <button
+                    type="button"
+                    key={option.id}
+                    className={answers[question.id] === option.id ? 'active' : ''}
+                    onClick={() => updateAnswer(question.id, option.id)}
+                  >
+                    {textFor(option.label)}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          ))}
+        </div>
+
+        {bestMatch && (
+          <aside className="glow-result" aria-live="polite">
+            <div className="result-label">{textFor(glowFinderEngine.ui.resultLabels.bestMatch)}</div>
+            <div className="result-card">
+              <div className="result-image">
+                <img src={bestMatch.image} alt={textFor(bestMatch.name)} loading="lazy" decoding="async" />
+              </div>
+              <div>
+                <p>{bestMatch.packSize}</p>
+                <h3>{textFor(bestMatch.name)}</h3>
+                <div className="result-chips">
+                  {formatNutrition(bestMatch).map((item) => <span key={item}>{item}</span>)}
+                </div>
+                <h4>{textFor(glowFinderEngine.ui.resultLabels.whyItFits)}</h4>
+                <p>
+                  This match lines up with your meal goal, preferred format, and flavour direction while keeping EveGlo's lighter pantry positioning front and centre.
+                </p>
+              </div>
+            </div>
+
+            <div className="also-good">
+              <span>{textFor(glowFinderEngine.ui.resultLabels.alsoGood)}</span>
+              {alternates.map((product) => (
+                <button type="button" key={product.id} onClick={() => navigate('home', 'shop')}>
+                  <img src={product.image} alt="" loading="lazy" decoding="async" />
+                  <strong>{textFor(product.name)}</strong>
+                </button>
+              ))}
+            </div>
+
+            <div className="bundle-card">
+              <span>{textFor(glowFinderEngine.ui.resultLabels.bundleSuggestion)}</span>
+              <strong>{textFor(bundle.name)}</strong>
+              <p>{bundle.products.length} products matched for your meal direction.</p>
+            </div>
+
+            {recipes.length > 0 && (
+              <div className="recipe-strip">
+                {recipes.map((recipe) => (
+                  <span key={recipe.id}>{textFor(recipe.title)}</span>
+                ))}
+              </div>
+            )}
+
+            <p className="glow-disclaimer">{glowFinderEngine.dataPolicy.publicFacingDisclaimer}</p>
+          </aside>
+        )}
+      </div>
     </section>
   );
 }
@@ -792,6 +947,7 @@ export default function App() {
             <Hero navigate={navigate} />
             <CategoryStrip navigate={navigate} />
             <ComingSoon />
+            <GlowFinder navigate={navigate} />
             <FeaturedCollection
               onOpenProduct={openProduct}
               searchQuery={searchQuery}

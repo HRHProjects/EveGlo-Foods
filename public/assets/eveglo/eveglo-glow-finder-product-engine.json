@@ -1,0 +1,1050 @@
+{
+  "manifestVersion": "1.0",
+  "featureId": "eveglo-glow-finder",
+  "featureName": "Glow Finder",
+  "featureType": "json-powered-shop-by-goal-product-engine",
+  "brand": "EveGlō Foods",
+  "localeDefault": "en-CA",
+  "locales": [
+    "en-CA",
+    "fr-CA"
+  ],
+  "purpose": "Replace generic product cards with a guided product recommendation experience that helps visitors choose the right EveGlō product for their meal, goal, flavour, and time limit.",
+  "removedIdeas": [
+    "packaging hotspots",
+    "static mockup gallery",
+    "click-the-box callouts"
+  ],
+  "dataPolicy": {
+    "sourceOfTruth": "EveGlō product package images are the primary source for product names, visible nutrition claims, pack sizes, and icons. Liviva is used only as a comparable reference because the product families closely match.",
+    "doNotMentionComparableBrandInUI": true,
+    "verifyBeforePublishing": true,
+    "conflictHandling": "If EveGlō packaging conflicts with comparable reference data, show the EveGlō package value and mark the conflicting reference field as verify.",
+    "publicFacingDisclaimer": "Product details should be checked against final approved labels before launch."
+  },
+  "assets": {
+    "basePath": "/assets/eveglo/products/",
+    "products": {
+      "instant-turmeric-shirataki-rice.png": "/mnt/data/Instant Tumeric Shirataki Rice(3).png",
+      "instant-coconut-shirataki-rice.png": "/mnt/data/Instant Coconut Shirataki Rice(3).png",
+      "instant-shirataki-rice.png": "/mnt/data/Dried Shirataki Rice(2).png",
+      "high-protein-linguine.png": "/mnt/data/High Protein Linguine(3).png",
+      "dried-shirataki-noodles.png": "/mnt/data/Dried Shirataki Noodles(2).png",
+      "high-protein-fettuccine.png": "/mnt/data/High Protein Fettuccine(2).png",
+      "dried-shirataki-spaghetti.png": "/mnt/data/Dried Shirataki Spaghetti(2).png",
+      "high-protein-spaghetti.png": "/mnt/data/High Protein Spaghetti(2).png",
+      "shirataki-penne-oat-fiber.png": "/mnt/data/Shirataki Penne(2).png"
+    }
+  },
+  "theme": {
+    "primaryBlue": "#0078A8",
+    "freshGreen": "#7AC943",
+    "deepTeal": "#064B5A",
+    "goldGlow": "#F4C51E",
+    "surface": "#FFFDF8",
+    "textDark": "#10242C",
+    "textLight": "#FFFFFF"
+  },
+  "ui": {
+    "componentName": "EvegloGlowFinder",
+    "entry": {
+      "eyebrow": {
+        "en-CA": "Choose by meal, not by aisle",
+        "fr-CA": "Choisissez selon le repas, pas selon l’allée"
+      },
+      "headline": {
+        "en-CA": "Find your perfect EveGlō match.",
+        "fr-CA": "Trouvez votre produit EveGlō idéal."
+      },
+      "body": {
+        "en-CA": "Answer four quick questions and get the right rice, noodle, or protein pasta for tonight’s meal.",
+        "fr-CA": "Répondez à quatre questions rapides et trouvez le riz, les nouilles ou les pâtes protéinées qui conviennent à votre repas."
+      },
+      "primaryCta": {
+        "en-CA": "Start the Glow Finder",
+        "fr-CA": "Commencer le sélecteur"
+      },
+      "secondaryCta": {
+        "en-CA": "View all products",
+        "fr-CA": "Voir tous les produits"
+      }
+    },
+    "resultLabels": {
+      "bestMatch": {
+        "en-CA": "Best match",
+        "fr-CA": "Meilleur choix"
+      },
+      "alsoGood": {
+        "en-CA": "Also good",
+        "fr-CA": "Autres bons choix"
+      },
+      "bundleSuggestion": {
+        "en-CA": "Suggested bundle",
+        "fr-CA": "Ensemble suggéré"
+      },
+      "whyItFits": {
+        "en-CA": "Why this fits",
+        "fr-CA": "Pourquoi ce choix convient"
+      }
+    },
+    "questions": [
+      {
+        "id": "goal",
+        "label": {
+          "en-CA": "What matters most?",
+          "fr-CA": "Qu’est-ce qui compte le plus?"
+        },
+        "type": "single",
+        "options": [
+          {
+            "id": "low_calorie",
+            "label": {
+              "en-CA": "Lowest calories",
+              "fr-CA": "Moins de calories"
+            }
+          },
+          {
+            "id": "low_carb",
+            "label": {
+              "en-CA": "Lower carbs",
+              "fr-CA": "Moins de glucides"
+            }
+          },
+          {
+            "id": "high_protein",
+            "label": {
+              "en-CA": "More protein",
+              "fr-CA": "Plus de protéines"
+            }
+          },
+          {
+            "id": "quick_meal",
+            "label": {
+              "en-CA": "Fast meal",
+              "fr-CA": "Repas rapide"
+            }
+          },
+          {
+            "id": "flavour",
+            "label": {
+              "en-CA": "Built-in flavour",
+              "fr-CA": "Saveur intégrée"
+            }
+          }
+        ]
+      },
+      {
+        "id": "meal_type",
+        "label": {
+          "en-CA": "What are you making?",
+          "fr-CA": "Qu’allez-vous préparer?"
+        },
+        "type": "single",
+        "options": [
+          {
+            "id": "rice_bowl",
+            "label": {
+              "en-CA": "Rice bowl",
+              "fr-CA": "Bol de riz"
+            }
+          },
+          {
+            "id": "curry_or_stew",
+            "label": {
+              "en-CA": "Curry or stew",
+              "fr-CA": "Cari ou ragoût"
+            }
+          },
+          {
+            "id": "stir_fry",
+            "label": {
+              "en-CA": "Stir-fry",
+              "fr-CA": "Sauté"
+            }
+          },
+          {
+            "id": "red_sauce_pasta",
+            "label": {
+              "en-CA": "Tomato pasta",
+              "fr-CA": "Pâtes sauce tomate"
+            }
+          },
+          {
+            "id": "cream_sauce_pasta",
+            "label": {
+              "en-CA": "Creamy pasta",
+              "fr-CA": "Pâtes crémeuses"
+            }
+          },
+          {
+            "id": "meal_prep",
+            "label": {
+              "en-CA": "Meal prep",
+              "fr-CA": "Préparation de repas"
+            }
+          }
+        ]
+      },
+      {
+        "id": "shape",
+        "label": {
+          "en-CA": "Pick a format",
+          "fr-CA": "Choisissez un format"
+        },
+        "type": "single",
+        "options": [
+          {
+            "id": "rice",
+            "label": {
+              "en-CA": "Rice",
+              "fr-CA": "Riz"
+            }
+          },
+          {
+            "id": "noodles",
+            "label": {
+              "en-CA": "Noodles",
+              "fr-CA": "Nouilles"
+            }
+          },
+          {
+            "id": "spaghetti",
+            "label": {
+              "en-CA": "Spaghetti",
+              "fr-CA": "Spaghetti"
+            }
+          },
+          {
+            "id": "linguine",
+            "label": {
+              "en-CA": "Linguine",
+              "fr-CA": "Linguine"
+            }
+          },
+          {
+            "id": "fettuccine",
+            "label": {
+              "en-CA": "Fettuccine",
+              "fr-CA": "Fettuccine"
+            }
+          },
+          {
+            "id": "penne",
+            "label": {
+              "en-CA": "Penne",
+              "fr-CA": "Penne"
+            }
+          },
+          {
+            "id": "surprise",
+            "label": {
+              "en-CA": "Recommend for me",
+              "fr-CA": "Recommandez-moi un choix"
+            }
+          }
+        ]
+      },
+      {
+        "id": "flavour_profile",
+        "label": {
+          "en-CA": "Flavour direction",
+          "fr-CA": "Profil de saveur"
+        },
+        "type": "single",
+        "options": [
+          {
+            "id": "neutral",
+            "label": {
+              "en-CA": "Neutral base",
+              "fr-CA": "Base neutre"
+            }
+          },
+          {
+            "id": "turmeric",
+            "label": {
+              "en-CA": "Turmeric / golden",
+              "fr-CA": "Curcuma / doré"
+            }
+          },
+          {
+            "id": "coconut",
+            "label": {
+              "en-CA": "Coconut",
+              "fr-CA": "Noix de coco"
+            }
+          },
+          {
+            "id": "oat_fiber",
+            "label": {
+              "en-CA": "Oat fiber",
+              "fr-CA": "Fibre d’avoine"
+            }
+          },
+          {
+            "id": "no_preference",
+            "label": {
+              "en-CA": "No preference",
+              "fr-CA": "Aucune préférence"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "products": [
+    {
+      "id": "instant-shirataki-rice",
+      "image": "/assets/eveglo/products/instant-shirataki-rice.png",
+      "name": {
+        "en-CA": "Instant Shirataki Rice",
+        "fr-CA": "Riz shirataki instantané"
+      },
+      "category": "rice",
+      "format": "rice",
+      "packSize": "150 g",
+      "visibleClaims": [
+        "35 calories",
+        "7 g carbohydrate",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "calories": 35,
+        "carbohydrateG": 7,
+        "netCarbsG": null,
+        "proteinG": null,
+        "serving": "50 g",
+        "source": "EveGlō package image"
+      },
+      "prep": {
+        "cookTimeMinutes": 8,
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "ingredients": {
+        "items": [
+          "konjac powder",
+          "rice flour",
+          "water"
+        ],
+        "source": "EveGlō back package image / comparable product pattern"
+      },
+      "tags": [
+        "low_calorie",
+        "rice",
+        "neutral",
+        "rice_bowl",
+        "stir_fry",
+        "meal_prep",
+        "quick_meal"
+      ]
+    },
+    {
+      "id": "instant-turmeric-shirataki-rice",
+      "image": "/assets/eveglo/products/instant-turmeric-shirataki-rice.png",
+      "name": {
+        "en-CA": "Instant Turmeric Shirataki Rice",
+        "fr-CA": "Riz shirataki au curcuma instantané"
+      },
+      "category": "rice",
+      "format": "rice",
+      "packSize": "150 g",
+      "visibleClaims": [
+        "36 calories",
+        "9 g net carbs",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "calories": 36,
+        "netCarbsG": 9,
+        "serving": "40 g cooked rice",
+        "source": "EveGlō package image",
+        "note": "Comparable product reference uses 8 g net carbs; EveGlō package image shows 9 g."
+      },
+      "prep": {
+        "cookTimeMinutes": 8,
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "ingredients": {
+        "items": [
+          "water",
+          "konjac flour",
+          "rice flour",
+          "turmeric"
+        ],
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "tags": [
+        "flavour",
+        "turmeric",
+        "rice",
+        "curry_or_stew",
+        "rice_bowl",
+        "quick_meal"
+      ]
+    },
+    {
+      "id": "instant-coconut-shirataki-rice",
+      "image": "/assets/eveglo/products/instant-coconut-shirataki-rice.png",
+      "name": {
+        "en-CA": "Instant Coconut Shirataki Rice",
+        "fr-CA": "Riz shirataki à la noix de coco instantané"
+      },
+      "category": "rice",
+      "format": "rice",
+      "packSize": "150 g",
+      "visibleClaims": [
+        "36 calories",
+        "8 g net carbs",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "calories": 36,
+        "netCarbsG": 8,
+        "serving": "40 g cooked rice",
+        "source": "EveGlō package image / comparable reference"
+      },
+      "prep": {
+        "cookTimeMinutes": 8,
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "ingredients": {
+        "items": [
+          "water",
+          "konjac flour",
+          "rice flour",
+          "coconut"
+        ],
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "tags": [
+        "flavour",
+        "coconut",
+        "rice",
+        "curry_or_stew",
+        "rice_bowl",
+        "quick_meal"
+      ]
+    },
+    {
+      "id": "dried-shirataki-noodles",
+      "image": "/assets/eveglo/products/dried-shirataki-noodles.png",
+      "name": {
+        "en-CA": "Dried Shirataki Noodles",
+        "fr-CA": "Nouilles shirataki séchées"
+      },
+      "category": "noodles",
+      "format": "noodles",
+      "packSize": "150 g",
+      "visibleClaims": [
+        "25 calories",
+        "5 g net carbs",
+        "7 g carbohydrate",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "calories": 25,
+        "netCarbsG": 5,
+        "carbohydrateG": 7,
+        "serving": "50 g",
+        "source": "EveGlō package image"
+      },
+      "prep": {
+        "cookTimeMinutes": null,
+        "source": "Verify from final package or product page"
+      },
+      "ingredients": {
+        "items": [],
+        "source": "Verify from final ingredient panel"
+      },
+      "tags": [
+        "low_calorie",
+        "low_carb",
+        "noodles",
+        "stir_fry",
+        "quick_meal"
+      ]
+    },
+    {
+      "id": "dried-shirataki-spaghetti",
+      "image": "/assets/eveglo/products/dried-shirataki-spaghetti.png",
+      "name": {
+        "en-CA": "Dried Shirataki Spaghetti",
+        "fr-CA": "Spaghetti de shirataki séché"
+      },
+      "category": "pasta",
+      "format": "spaghetti",
+      "packSize": "150 g",
+      "visibleClaims": [
+        "Low carb",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "calories": 25,
+        "netCarbsG": 5,
+        "serving": "50 g",
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "prep": {
+        "cookTimeMinutes": 15,
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "ingredients": {
+        "items": [
+          "water",
+          "konjac flour",
+          "tapioca flour",
+          "oat fibre"
+        ],
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "tags": [
+        "low_calorie",
+        "low_carb",
+        "spaghetti",
+        "red_sauce_pasta",
+        "meal_prep"
+      ]
+    },
+    {
+      "id": "shirataki-penne-oat-fiber",
+      "image": "/assets/eveglo/products/shirataki-penne-oat-fiber.png",
+      "name": {
+        "en-CA": "Shirataki Penne with Oat Fiber",
+        "fr-CA": "Penne shirataki avec fibre d’avoine"
+      },
+      "category": "pasta",
+      "format": "penne",
+      "packSize": "150 g",
+      "visibleClaims": [
+        "Oat fiber",
+        "Low calorie",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "calories": 15,
+        "sugarG": 0,
+        "fatG": 0,
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "prep": {
+        "cookTimeMinutes": null,
+        "source": "Verify from final package or product page"
+      },
+      "ingredients": {
+        "items": [
+          "water",
+          "organic konjac flour",
+          "oat fiber",
+          "citric acid"
+        ],
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "tags": [
+        "low_calorie",
+        "oat_fiber",
+        "penne",
+        "cream_sauce_pasta",
+        "red_sauce_pasta"
+      ]
+    },
+    {
+      "id": "high-protein-linguine",
+      "image": "/assets/eveglo/products/high-protein-linguine.png",
+      "name": {
+        "en-CA": "High Protein Linguine",
+        "fr-CA": "Linguine riche en protéines"
+      },
+      "category": "high-protein-pasta",
+      "format": "linguine",
+      "packSize": "225 g",
+      "visibleClaims": [
+        "27 g protein",
+        "160 calories",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "calories": 160,
+        "proteinG": 27,
+        "serving": "45 g",
+        "source": "EveGlō package image / comparable category reference"
+      },
+      "prep": {
+        "cookTimeMinutes": 2,
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "ingredients": {
+        "items": [],
+        "source": "Verify from final ingredient panel"
+      },
+      "tags": [
+        "high_protein",
+        "linguine",
+        "quick_meal",
+        "cream_sauce_pasta",
+        "meal_prep"
+      ]
+    },
+    {
+      "id": "high-protein-fettuccine",
+      "image": "/assets/eveglo/products/high-protein-fettuccine.png",
+      "name": {
+        "en-CA": "High Protein Fettuccine",
+        "fr-CA": "Fettuccine riche en protéines"
+      },
+      "category": "high-protein-pasta",
+      "format": "fettuccine",
+      "packSize": "150 g",
+      "visibleClaims": [
+        "27 g protein",
+        "2–5 min quick cook",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "proteinG": 27,
+        "serving": "50 g",
+        "source": "EveGlō package image"
+      },
+      "prep": {
+        "cookTimeMinutes": 3.5,
+        "source": "Comparable product reference; verify for EveGlō final label"
+      },
+      "ingredients": {
+        "items": [],
+        "source": "Verify from final ingredient panel"
+      },
+      "tags": [
+        "high_protein",
+        "fettuccine",
+        "quick_meal",
+        "cream_sauce_pasta"
+      ]
+    },
+    {
+      "id": "high-protein-spaghetti",
+      "image": "/assets/eveglo/products/high-protein-spaghetti.png",
+      "name": {
+        "en-CA": "High Protein Spaghetti",
+        "fr-CA": "Spaghetti riche en protéines"
+      },
+      "category": "high-protein-pasta",
+      "format": "spaghetti",
+      "packSize": "150 g",
+      "visibleClaims": [
+        "27 g protein",
+        "GMO free",
+        "Vegan",
+        "Halal"
+      ],
+      "nutrition": {
+        "proteinG": 27,
+        "serving": "50 g",
+        "source": "EveGlō package image"
+      },
+      "prep": {
+        "cookTimeMinutesRange": [
+          2,
+          5
+        ],
+        "source": "Comparable high-protein pasta category reference; verify for EveGlō final label"
+      },
+      "ingredients": {
+        "items": [],
+        "source": "Verify from final ingredient panel"
+      },
+      "tags": [
+        "high_protein",
+        "spaghetti",
+        "quick_meal",
+        "red_sauce_pasta",
+        "meal_prep"
+      ]
+    }
+  ],
+  "scoringModel": {
+    "baseScore": 0,
+    "rules": [
+      {
+        "when": {
+          "goal": "low_calorie"
+        },
+        "add": {
+          "instant-shirataki-rice": 8,
+          "dried-shirataki-noodles": 10,
+          "dried-shirataki-spaghetti": 10,
+          "shirataki-penne-oat-fiber": 10
+        }
+      },
+      {
+        "when": {
+          "goal": "low_carb"
+        },
+        "add": {
+          "dried-shirataki-noodles": 10,
+          "dried-shirataki-spaghetti": 10,
+          "instant-coconut-shirataki-rice": 7,
+          "instant-turmeric-shirataki-rice": 6
+        }
+      },
+      {
+        "when": {
+          "goal": "high_protein"
+        },
+        "add": {
+          "high-protein-linguine": 12,
+          "high-protein-fettuccine": 12,
+          "high-protein-spaghetti": 12
+        }
+      },
+      {
+        "when": {
+          "goal": "quick_meal"
+        },
+        "add": {
+          "instant-shirataki-rice": 8,
+          "instant-coconut-shirataki-rice": 8,
+          "instant-turmeric-shirataki-rice": 8,
+          "high-protein-linguine": 9,
+          "high-protein-fettuccine": 9,
+          "high-protein-spaghetti": 8
+        }
+      },
+      {
+        "when": {
+          "meal_type": "rice_bowl"
+        },
+        "add": {
+          "instant-shirataki-rice": 12,
+          "instant-turmeric-shirataki-rice": 9,
+          "instant-coconut-shirataki-rice": 9
+        }
+      },
+      {
+        "when": {
+          "meal_type": "curry_or_stew"
+        },
+        "add": {
+          "instant-coconut-shirataki-rice": 12,
+          "instant-turmeric-shirataki-rice": 10,
+          "instant-shirataki-rice": 7
+        }
+      },
+      {
+        "when": {
+          "meal_type": "stir_fry"
+        },
+        "add": {
+          "dried-shirataki-noodles": 12,
+          "instant-shirataki-rice": 8
+        }
+      },
+      {
+        "when": {
+          "meal_type": "red_sauce_pasta"
+        },
+        "add": {
+          "high-protein-spaghetti": 12,
+          "dried-shirataki-spaghetti": 9,
+          "shirataki-penne-oat-fiber": 8
+        }
+      },
+      {
+        "when": {
+          "meal_type": "cream_sauce_pasta"
+        },
+        "add": {
+          "high-protein-fettuccine": 12,
+          "high-protein-linguine": 9,
+          "shirataki-penne-oat-fiber": 8
+        }
+      },
+      {
+        "when": {
+          "shape": "rice"
+        },
+        "add": {
+          "instant-shirataki-rice": 12,
+          "instant-coconut-shirataki-rice": 10,
+          "instant-turmeric-shirataki-rice": 10
+        }
+      },
+      {
+        "when": {
+          "shape": "noodles"
+        },
+        "add": {
+          "dried-shirataki-noodles": 12
+        }
+      },
+      {
+        "when": {
+          "shape": "spaghetti"
+        },
+        "add": {
+          "high-protein-spaghetti": 10,
+          "dried-shirataki-spaghetti": 10
+        }
+      },
+      {
+        "when": {
+          "shape": "linguine"
+        },
+        "add": {
+          "high-protein-linguine": 12
+        }
+      },
+      {
+        "when": {
+          "shape": "fettuccine"
+        },
+        "add": {
+          "high-protein-fettuccine": 12
+        }
+      },
+      {
+        "when": {
+          "shape": "penne"
+        },
+        "add": {
+          "shirataki-penne-oat-fiber": 12
+        }
+      },
+      {
+        "when": {
+          "flavour_profile": "turmeric"
+        },
+        "add": {
+          "instant-turmeric-shirataki-rice": 14
+        }
+      },
+      {
+        "when": {
+          "flavour_profile": "coconut"
+        },
+        "add": {
+          "instant-coconut-shirataki-rice": 14
+        }
+      },
+      {
+        "when": {
+          "flavour_profile": "neutral"
+        },
+        "add": {
+          "instant-shirataki-rice": 8,
+          "dried-shirataki-noodles": 8,
+          "dried-shirataki-spaghetti": 8,
+          "high-protein-linguine": 6,
+          "high-protein-fettuccine": 6,
+          "high-protein-spaghetti": 6
+        }
+      },
+      {
+        "when": {
+          "flavour_profile": "oat_fiber"
+        },
+        "add": {
+          "shirataki-penne-oat-fiber": 12,
+          "dried-shirataki-spaghetti": 7
+        }
+      }
+    ],
+    "tieBreakers": [
+      "exactShapeMatch",
+      "goalMatch",
+      "quickMeal",
+      "packagingCompleteness",
+      "alphabetical"
+    ]
+  },
+  "bundles": [
+    {
+      "id": "rice-flight",
+      "name": {
+        "en-CA": "Rice Flight",
+        "fr-CA": "Trio de riz"
+      },
+      "products": [
+        "instant-shirataki-rice",
+        "instant-turmeric-shirataki-rice",
+        "instant-coconut-shirataki-rice"
+      ],
+      "bestFor": [
+        "rice_bowl",
+        "curry_or_stew",
+        "meal_prep"
+      ]
+    },
+    {
+      "id": "protein-pasta-trio",
+      "name": {
+        "en-CA": "Protein Pasta Trio",
+        "fr-CA": "Trio de pâtes protéinées"
+      },
+      "products": [
+        "high-protein-linguine",
+        "high-protein-fettuccine",
+        "high-protein-spaghetti"
+      ],
+      "bestFor": [
+        "high_protein",
+        "quick_meal",
+        "meal_prep"
+      ]
+    },
+    {
+      "id": "low-calorie-shape-pack",
+      "name": {
+        "en-CA": "Low-Calorie Shape Pack",
+        "fr-CA": "Ensemble faible en calories"
+      },
+      "products": [
+        "dried-shirataki-noodles",
+        "dried-shirataki-spaghetti",
+        "shirataki-penne-oat-fiber"
+      ],
+      "bestFor": [
+        "low_calorie",
+        "low_carb",
+        "stir_fry"
+      ]
+    },
+    {
+      "id": "weeknight-starter",
+      "name": {
+        "en-CA": "Weeknight Swap Starter",
+        "fr-CA": "Départ repas de semaine"
+      },
+      "products": [
+        "instant-shirataki-rice",
+        "high-protein-spaghetti",
+        "shirataki-penne-oat-fiber"
+      ],
+      "bestFor": [
+        "quick_meal",
+        "family_meal",
+        "no_preference"
+      ]
+    }
+  ],
+  "recipePairings": [
+    {
+      "id": "golden-curry-bowl",
+      "productId": "instant-turmeric-shirataki-rice",
+      "title": {
+        "en-CA": "Golden Curry Bowl",
+        "fr-CA": "Bol au cari doré"
+      },
+      "tags": [
+        "turmeric",
+        "curry_or_stew"
+      ]
+    },
+    {
+      "id": "coconut-chili-rice",
+      "productId": "instant-coconut-shirataki-rice",
+      "title": {
+        "en-CA": "Coconut Chili Rice Bowl",
+        "fr-CA": "Bol de riz coco et chili"
+      },
+      "tags": [
+        "coconut",
+        "rice_bowl"
+      ]
+    },
+    {
+      "id": "protein-marinara",
+      "productId": "high-protein-spaghetti",
+      "title": {
+        "en-CA": "High-Protein Marinara",
+        "fr-CA": "Marinara riche en protéines"
+      },
+      "tags": [
+        "high_protein",
+        "red_sauce_pasta"
+      ]
+    },
+    {
+      "id": "creamy-fettuccine",
+      "productId": "high-protein-fettuccine",
+      "title": {
+        "en-CA": "Quick Creamy Fettuccine",
+        "fr-CA": "Fettuccine crémeux rapide"
+      },
+      "tags": [
+        "high_protein",
+        "cream_sauce_pasta"
+      ]
+    },
+    {
+      "id": "low-carb-noodle-stirfry",
+      "productId": "dried-shirataki-noodles",
+      "title": {
+        "en-CA": "Low-Carb Noodle Stir-Fry",
+        "fr-CA": "Sauté de nouilles faible en glucides"
+      },
+      "tags": [
+        "low_carb",
+        "stir_fry"
+      ]
+    }
+  ],
+  "comparisonTable": {
+    "columns": [
+      "product",
+      "format",
+      "bestFor",
+      "calories",
+      "carbs",
+      "protein",
+      "packSize"
+    ],
+    "defaultSort": "goalMatch",
+    "showAfterQuiz": true
+  },
+  "analytics": {
+    "events": [
+      "glow_finder_started",
+      "glow_finder_question_answered",
+      "glow_finder_result_viewed",
+      "glow_finder_bundle_viewed",
+      "glow_finder_add_to_cart_clicked"
+    ]
+  },
+  "seo": {
+    "generateProductJsonLd": true,
+    "generateFAQJsonLd": true,
+    "productCollectionTitle": "EveGlō Shirataki Rice and Pasta Collection",
+    "metaDescription": "Find the right EveGlō shirataki rice, noodle, or protein pasta for your meal goal with a guided product selector."
+  },
+  "developerNotes": {
+    "installPath": "/public/assets/eveglo/",
+    "requiredFiles": [
+      "eveglo-glow-finder-product-engine.json",
+      "products/*.png"
+    ],
+    "codexPrompt": "Build a React/Next.js component called EvegloGlowFinder from this JSON. Do not build packaging hotspots. Render a four-question quiz, score products using scoringModel.rules, display one best match, two alternates, a bundle suggestion, and recipe pairings. Use the product images from /assets/eveglo/products/. Add EN/FR toggle, add-to-cart callbacks, analytics events, and schema output. All visible copy must come from JSON. Hide comparable-source notes from customer UI but keep them available in admin/debug mode.",
+    "recommendedComponents": [
+      "QuizStepper",
+      "ProductResultCard",
+      "BundleSuggestion",
+      "ComparisonTable",
+      "RecipePairingStrip",
+      "LanguageToggle"
+    ],
+    "implementationWarning": "Final nutrition, ingredients, and prep times should be checked against approved packaging or a final product database before publishing."
+  }
+}

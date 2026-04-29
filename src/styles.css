@@ -491,6 +491,218 @@ h1, h2, h3 {
   font-weight: 900;
 }
 
+.glow-finder {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 18px 22px 78px;
+}
+.glow-finder-intro {
+  max-width: 760px;
+  margin-bottom: 26px;
+}
+.glow-finder-intro h2 {
+  margin: 0;
+  color: var(--charcoal);
+  font-size: clamp(2.1rem, 4.5vw, 4.6rem);
+  line-height: 1.02;
+}
+.glow-finder-intro p:not(.eyebrow) {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.glow-finder-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.48fr);
+  gap: 24px;
+  align-items: start;
+}
+.glow-quiz {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.glow-question {
+  min-width: 0;
+  margin: 0;
+  padding: 22px;
+  border: 1px solid rgba(0, 120, 168, 0.14);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(244, 197, 30, 0.24), transparent 26%),
+    var(--white);
+  box-shadow: 0 14px 38px rgba(34, 36, 41, 0.07);
+}
+.glow-question legend {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 16px;
+  color: var(--charcoal);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 750;
+  line-height: 1.1;
+}
+.glow-question legend span {
+  width: max-content;
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: #dff9e6;
+  color: #159631;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+.glow-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.glow-options button {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--charcoal);
+  padding: 0 13px;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+.glow-options button.active {
+  border-color: rgba(0, 120, 168, 0.22);
+  background: #0078a8;
+  color: var(--white);
+  box-shadow: 0 10px 22px rgba(0, 120, 168, 0.18);
+}
+.glow-result {
+  position: sticky;
+  top: 112px;
+  display: grid;
+  gap: 14px;
+}
+.result-label,
+.also-good > span,
+.bundle-card > span {
+  width: max-content;
+  border-radius: 999px;
+  background: #10242c;
+  color: var(--white);
+  padding: 8px 11px;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+.result-card {
+  display: grid;
+  gap: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 120, 168, 0.16);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(122, 201, 67, 0.28), transparent 26%),
+    linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(243, 239, 231, 0.82));
+  box-shadow: 0 22px 58px rgba(34, 36, 41, 0.12);
+}
+.result-image {
+  min-height: 280px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(244, 197, 30, 0.26), transparent 34%),
+    rgba(255, 255, 255, 0.72);
+}
+.result-image img {
+  width: min(84%, 260px);
+  max-height: 260px;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 30px rgba(34, 36, 41, 0.2));
+}
+.result-card > div:last-child {
+  padding: 0 22px 22px;
+}
+.result-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.58;
+}
+.result-card h3 {
+  margin: 7px 0 12px;
+  color: var(--charcoal);
+  font-size: 1.75rem;
+  line-height: 1.08;
+}
+.result-card h4 {
+  margin: 18px 0 8px;
+  color: #0078a8;
+}
+.result-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.result-chips span,
+.recipe-strip span {
+  border-radius: 999px;
+  background: #dff9e6;
+  color: #159631;
+  padding: 8px 10px;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+.also-good {
+  display: grid;
+  gap: 10px;
+}
+.also-good button {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  color: var(--charcoal);
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 900;
+  box-shadow: 0 10px 28px rgba(34, 36, 41, 0.06);
+}
+.also-good img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+.bundle-card {
+  display: grid;
+  gap: 8px;
+  border: 1px solid rgba(244, 197, 30, 0.32);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(244, 197, 30, 0.18), rgba(255, 255, 255, 0.94));
+  padding: 18px;
+}
+.bundle-card strong {
+  color: var(--charcoal);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+}
+.bundle-card p,
+.glow-disclaimer {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.recipe-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.glow-disclaimer {
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
 .collection, .konjac-section {
   max-width: 1240px;
   margin: 0 auto;
@@ -1148,6 +1360,13 @@ h1, h2, h3 {
   .nav-links.is-open { display: flex; }
   .site-search { margin-bottom: 14px; }
   .category-strip, .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .glow-finder-shell,
+  .glow-quiz {
+    grid-template-columns: 1fr;
+  }
+  .glow-result {
+    position: static;
+  }
   .content-grid, .detail-layout, .konjac-layout { grid-template-columns: 1fr; }
   .detail-pack { min-height: 360px; }
   .promo-band, .wholesale { grid-template-columns: 1fr; }
@@ -1284,6 +1503,7 @@ h1, h2, h3 {
   }
   .coming-soon h2,
   .section-heading h2,
+  .glow-finder-intro h2,
   .promo-band h2,
   .wholesale h2 {
     letter-spacing: 0;
@@ -1365,8 +1585,42 @@ h1, h2, h3 {
   .section-heading {
     padding-right: 64px;
   }
+  .glow-finder,
   .collection, .konjac-section {
     padding: 16px 16px 56px;
+  }
+  .glow-finder-shell {
+    gap: 18px;
+  }
+  .glow-question {
+    padding: 18px;
+    border-radius: 22px;
+  }
+  .glow-question legend {
+    font-size: 1.18rem;
+  }
+  .glow-options {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .glow-options button {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    line-height: 1.12;
+    padding: 10px 12px;
+  }
+  .result-card {
+    border-radius: 24px;
+  }
+  .result-image {
+    min-height: 230px;
+  }
+  .result-image img {
+    max-height: 220px;
+  }
+  .result-card h3 {
+    font-size: 1.45rem;
   }
   .collection-search {
     max-width: none;
