@@ -494,7 +494,7 @@ h1, h2, h3 {
 .glow-finder {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 18px 22px 78px;
+  padding: 18px 22px 28px;
 }
 .glow-finder-intro {
   max-width: 760px;
@@ -703,7 +703,7 @@ h1, h2, h3 {
   font-weight: 800;
 }
 .recipe-inspiration {
-  margin-top: 28px;
+  margin-top: 22px;
   padding: clamp(24px, 4vw, 36px);
   border: 1px solid rgba(46, 212, 79, 0.2);
   border-radius: 32px;
@@ -781,6 +781,11 @@ h1, h2, h3 {
 .collection, .konjac-section {
   max-width: 1240px;
   margin: 0 auto;
+}
+.collection {
+  padding: 4px 22px 76px;
+}
+.konjac-section {
   padding: 20px 22px 76px;
 }
 
@@ -1661,8 +1666,13 @@ h1, h2, h3 {
   .section-heading {
     padding-right: 64px;
   }
-  .glow-finder,
-  .collection, .konjac-section {
+  .glow-finder {
+    padding: 16px 16px 24px;
+  }
+  .collection {
+    padding: 6px 16px 56px;
+  }
+  .konjac-section {
     padding: 16px 16px 56px;
   }
   .glow-finder-shell {
@@ -1699,7 +1709,7 @@ h1, h2, h3 {
     font-size: 1.45rem;
   }
   .recipe-inspiration {
-    margin-top: 22px;
+    margin-top: 18px;
     padding: 22px 16px;
     border-radius: 26px;
   }

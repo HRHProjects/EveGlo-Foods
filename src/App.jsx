@@ -74,8 +74,23 @@ function recipeImagePath(recipe) {
   return `/assets/eveglo/recipes/${recipe.webp.split('/').pop()}`;
 }
 
+function normalizeRecipeMatch(value) {
+  return textFor(value)
+    .toLowerCase()
+    .replaceAll('eveglo', '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
 function recipeMatchesProduct(recipe, product) {
-  return Boolean(product && recipe.id.startsWith(product.id));
+  if (!product) return false;
+
+  const recipeId = recipe.id.toLowerCase();
+  const productId = product.id.toLowerCase();
+  const recipeProduct = normalizeRecipeMatch(recipe.product);
+  const productName = normalizeRecipeMatch(product.name);
+
+  return recipeId.includes(productId) || recipeProduct.includes(productName) || productName.includes(recipeProduct);
 }
 
 function FoodCharacter({ variant, className = '' }) {
@@ -239,19 +254,26 @@ function GlowFinder({ navigate }) {
     item.products.includes(bestMatch?.id)
   )) || glowFinderEngine.bundles[0];
   const recipeIdeas = useMemo(() => {
-    const recommendedProducts = [bestMatch, ...alternates].filter(Boolean);
+    const bundleProducts = bundle.products
+      .map((productId) => glowProducts.find((product) => product.id === productId))
+      .filter(Boolean);
+    const recommendedProducts = [bestMatch, ...alternates, ...bundleProducts]
+      .filter((product, index, list) => product && list.findIndex((item) => item.id === product.id) === index);
     const directMatches = recipeReference.items.filter((recipe) => (
       recommendedProducts.some((product) => recipeMatchesProduct(recipe, product))
     ));
-    const selectedTagText = selectedValues.join(' ').replaceAll('_', ' ').toLowerCase();
+    const selectedTerms = selectedValues.map(normalizeRecipeMatch).filter(Boolean);
     const tagMatches = recipeReference.items.filter((recipe) => (
       !directMatches.includes(recipe) &&
-      recipe.tags.some((tag) => selectedTagText.includes(tag.toLowerCase()) || tag.toLowerCase().includes(selectedTagText))
+      recipe.tags.some((tag) => {
+        const normalizedTag = normalizeRecipeMatch(tag);
+        return selectedTerms.some((term) => normalizedTag.includes(term) || term.includes(normalizedTag));
+      })
     ));
     return [...directMatches, ...tagMatches, ...recipeReference.items]
       .filter((recipe, index, list) => list.findIndex((item) => item.id === recipe.id) === index)
       .slice(0, 4);
-  }, [bestMatch, alternates, selectedValues]);
+  }, [bestMatch, alternates, bundle, selectedValues]);
 
   const updateAnswer = (questionId, optionId) => {
     setAnswers((current) => ({ ...current, [questionId]: optionId }));
