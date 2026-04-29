@@ -29,6 +29,8 @@ const glowQuestions = glowFinderEngine.ui.questions;
 function textFor(value) {
   const raw = typeof value === 'string' ? value : value?.[glowLocale] || value?.['en-CA'] || '';
   return raw
+    .replaceAll('EveGlō', 'EveGlo')
+    .replaceAll('EveGlÅ', 'EveGlo')
     .replaceAll('EveGlÅ', 'EveGlo')
     .replaceAll('â€™', "'")
     .replaceAll('â€“', '-')
@@ -93,6 +95,40 @@ function recipeMatchesProduct(recipe, product) {
   return recipeId.includes(productId) || recipeProduct.includes(productName) || productName.includes(recipeProduct);
 }
 
+function selectedGlowLabels(answers) {
+  return glowQuestions.map((question) => {
+    const option = question.options.find((item) => item.id === answers[question.id]);
+    return option ? textFor(option.label) : '';
+  }).filter(Boolean);
+}
+
+function scoreRecipeIdea(recipe, recommendedProducts, selectedTerms) {
+  const productScore = recommendedProducts.reduce((total, product, index) => {
+    if (!recipeMatchesProduct(recipe, product)) return total;
+    if (index === 0) return total + 24;
+    if (index < 3) return total + 12;
+    return total + 6;
+  }, 0);
+  const searchableRecipe = [
+    recipe.id,
+    recipe.product,
+    recipe.dish,
+    ...recipe.tags,
+    ...recipe.ingredients.slice(0, 4)
+  ].map(normalizeRecipeMatch).join(' ');
+  const termScore = selectedTerms.reduce((total, term) => (
+    searchableRecipe.includes(term) ? total + 4 : total
+  ), 0);
+  const tagScore = recipe.tags.reduce((total, tag) => {
+    const normalizedTag = normalizeRecipeMatch(tag);
+    return total + selectedTerms.reduce((tagTotal, term) => (
+      normalizedTag.includes(term) || term.includes(normalizedTag) ? tagTotal + 5 : tagTotal
+    ), 0);
+  }, 0);
+
+  return productScore + termScore + tagScore;
+}
+
 function FoodCharacter({ variant, className = '' }) {
   return (
     <div className={`food-character ${variant} ${className}`} aria-hidden="true">
@@ -146,6 +182,7 @@ function Header({ navigate, onSearch }) {
           {departments.slice(0, 4).map((department) => (
             <button type="button" onClick={() => go('home', 'shop')} key={department}>{department}</button>
           ))}
+          <button type="button" onClick={() => go('glow')}>Glow Finder</button>
           <button type="button" onClick={() => go('about')}>About</button>
           <a href="/news/eveglo-foods-launch-delay/">News</a>
           <button type="button" onClick={() => go('home', 'wholesale')}>Wholesale</button>
@@ -249,6 +286,7 @@ function GlowFinder({ navigate }) {
   const bestMatch = scoredProducts[0]?.product;
   const alternates = scoredProducts.slice(1, 3).map((item) => item.product);
   const selectedValues = Object.values(answers);
+  const selectedLabels = useMemo(() => selectedGlowLabels(answers), [answers]);
   const bundle = glowFinderEngine.bundles.find((item) => (
     item.bestFor.some((tag) => selectedValues.includes(tag)) ||
     item.products.includes(bestMatch?.id)
@@ -259,21 +297,21 @@ function GlowFinder({ navigate }) {
       .filter(Boolean);
     const recommendedProducts = [bestMatch, ...alternates, ...bundleProducts]
       .filter((product, index, list) => product && list.findIndex((item) => item.id === product.id) === index);
-    const directMatches = recipeReference.items.filter((recipe) => (
-      recommendedProducts.some((product) => recipeMatchesProduct(recipe, product))
-    ));
-    const selectedTerms = selectedValues.map(normalizeRecipeMatch).filter(Boolean);
-    const tagMatches = recipeReference.items.filter((recipe) => (
-      !directMatches.includes(recipe) &&
-      recipe.tags.some((tag) => {
-        const normalizedTag = normalizeRecipeMatch(tag);
-        return selectedTerms.some((term) => normalizedTag.includes(term) || term.includes(normalizedTag));
+    const selectedTerms = [...selectedValues, ...selectedLabels]
+      .map(normalizeRecipeMatch)
+      .filter((term) => term && term !== 'recommend for me' && term !== 'no preference');
+    return recipeReference.items
+      .map((recipe) => ({
+        recipe,
+        score: scoreRecipeIdea(recipe, recommendedProducts, selectedTerms)
+      }))
+      .sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return textFor(a.recipe.dish).localeCompare(textFor(b.recipe.dish));
       })
-    ));
-    return [...directMatches, ...tagMatches, ...recipeReference.items]
-      .filter((recipe, index, list) => list.findIndex((item) => item.id === recipe.id) === index)
+      .map((item) => item.recipe)
       .slice(0, 4);
-  }, [bestMatch, alternates, bundle, selectedValues]);
+  }, [bestMatch, alternates, bundle, selectedValues, selectedLabels]);
 
   const updateAnswer = (questionId, optionId) => {
     setAnswers((current) => ({ ...current, [questionId]: optionId }));
@@ -315,10 +353,13 @@ function GlowFinder({ navigate }) {
           <div className="result-recipes" key={recipeIdeas.map((recipe) => recipe.id).join('-')} aria-label="Serving ideas for the selected Glow Finder result">
             <div className="result-recipes-heading">
               <span><Leaf size={15} /> Serving ideas</span>
-              <h4>Meal ideas for this match</h4>
+              <h4>{bestMatch ? `Meal ideas for ${textFor(bestMatch.name)}` : 'Meal ideas'}</h4>
               <p>
                 Inspiration only: EveGlo products can be used as the base ingredient, while sauces, vegetables, proteins, and toppings are meal ideas.
               </p>
+              <div className="selected-recipe-tags" aria-label="Current Glow Finder selections">
+                {selectedLabels.map((label) => <span key={label}>{label}</span>)}
+              </div>
             </div>
             <div className="result-recipe-list">
               {recipeIdeas.map((recipe) => (
@@ -376,8 +417,6 @@ function GlowFinder({ navigate }) {
               <strong>{textFor(bundle.name)}</strong>
               <p>{bundle.products.length} products matched for your meal direction.</p>
             </div>
-
-            <p className="glow-disclaimer">{glowFinderEngine.dataPolicy.publicFacingDisclaimer}</p>
           </aside>
         )}
       </div>
@@ -662,6 +701,7 @@ function KonjacFacts() {
       <div className="section-heading compact">
         <p className="eyebrow"><Leaf size={16} /> Konjac facts</p>
         <h2>Why konjac makes lighter comfort food worth trying.</h2>
+        <p className="konjac-mobile-hint">Tap any fact to see more.</p>
       </div>
       <div className="konjac-layout">
         <figure className="konjac-frame">
@@ -681,12 +721,10 @@ function KonjacFacts() {
                 if (event.pointerType === 'mouse') setActiveFact('');
               }}
               onClick={() => toggleFact(fact.title)}
-              onFocus={() => setActiveFact(fact.title)}
-              onBlur={() => setActiveFact('')}
             >
               <span>{fact.kicker}</span>
               <strong>{fact.title}</strong>
-              <em><b>Note:</b> {fact.detail}</em>
+              <em>{fact.detail}</em>
             </button>
           ))}
         </div>
@@ -938,6 +976,7 @@ function Footer({ navigate }) {
       <div>
         <h4>Company</h4>
         <button type="button" onClick={() => navigate('about')}>About</button>
+        <button type="button" onClick={() => navigate('glow')}>Glow Finder</button>
         <a href="/news/eveglo-foods-launch-delay/">News</a>
         <button type="button" onClick={() => navigate('home', 'wholesale')}>Wholesale</button>
         <a href="mailto:Info@EveGlofoods.com">Contact us</a>
@@ -967,13 +1006,13 @@ function MobileDock({ navigate, onSearch }) {
         <Search size={18} />
         <span>Shop</span>
       </button>
+      <button type="button" onClick={() => navigate('glow')}>
+        <Sparkles size={18} />
+        <span>Finder</span>
+      </button>
       <a href="/news/eveglo-foods-launch-delay/">
         <Megaphone size={18} />
         <span>News</span>
-      </a>
-      <a href="mailto:Info@EveGlofoods.com">
-        <Mail size={18} />
-        <span>Contact</span>
       </a>
     </nav>
   );
@@ -1011,7 +1050,6 @@ export default function App() {
             <Hero navigate={navigate} />
             <CategoryStrip navigate={navigate} />
             <ComingSoon />
-            <GlowFinder navigate={navigate} />
             <FeaturedCollection
               onOpenProduct={openProduct}
               searchQuery={searchQuery}
@@ -1023,6 +1061,7 @@ export default function App() {
             <Wholesale />
           </>
         )}
+        {page === 'glow' && <GlowFinder navigate={navigate} />}
         {page === 'about' && <AboutPage navigate={navigate} />}
         {page === 'updates' && <UpdatesPage />}
         {page === 'privacy' && <PrivacyPolicyPage />}

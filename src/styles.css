@@ -696,8 +696,7 @@ h1, h2, h3 {
   font-family: var(--font-display);
   font-size: 1.35rem;
 }
-.bundle-card p,
-.glow-disclaimer {
+.bundle-card p {
   margin: 0;
   color: var(--muted);
   line-height: 1.55;
@@ -706,10 +705,6 @@ h1, h2, h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-}
-.glow-disclaimer {
-  font-size: 0.82rem;
-  font-weight: 800;
 }
 .result-recipes {
   display: grid;
@@ -752,6 +747,19 @@ h1, h2, h3 {
   font-size: 0.9rem;
   font-weight: 800;
   line-height: 1.55;
+}
+.selected-recipe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.selected-recipe-tags span {
+  border-radius: 999px;
+  background: rgba(0, 120, 168, 0.1);
+  color: #064b5a;
+  padding: 7px 9px;
+  font-size: 0.72rem;
+  font-weight: 900;
 }
 .result-recipe-list {
   display: grid;
@@ -1161,6 +1169,9 @@ h1, h2, h3 {
   object-fit: contain;
   filter: drop-shadow(0 24px 34px rgba(34, 36, 41, 0.22));
 }
+.konjac-mobile-hint {
+  display: none;
+}
 .konjac-facts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1207,11 +1218,6 @@ h1, h2, h3 {
   opacity: 0;
   transform: translateY(10px);
   transition: max-height 0.24s ease, opacity 0.24s ease, transform 0.24s ease;
-}
-.konjac-fact em b {
-  color: var(--green-dark);
-  font-style: normal;
-  font-weight: 900;
 }
 .konjac-fact:hover,
 .konjac-fact:focus-visible,
@@ -1856,6 +1862,14 @@ h1, h2, h3 {
   }
   .konjac-layout {
     gap: 18px;
+  }
+  .konjac-mobile-hint {
+    display: block;
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 900;
+    line-height: 1.45;
   }
   .konjac-frame {
     min-height: 300px;
