@@ -1,0 +1,270 @@
+{
+  "brand": "EveGlō Foods",
+  "purpose": "Recipe reference asset folder for the Glow Finder / product selector feature.",
+  "usageNote": "These ingredient lists are recipe-inspiration notes for website reference images. They are not nutrition facts and should not replace the official package labels.",
+  "items": [
+    {
+      "id": "instant-turmeric-shirataki-rice-buddha-bowl",
+      "product": "EveGlō Instant Turmeric Shirataki Rice",
+      "dish": "Golden Turmeric Shirataki Rice Buddha Bowl",
+      "image": "images/eveglo-instant-turmeric-shirataki-rice_golden-buddha-bowl.png",
+      "webp": "webp/eveglo-instant-turmeric-shirataki-rice_golden-buddha-bowl.webp",
+      "note": "notes/eveglo-instant-turmeric-shirataki-rice_golden-buddha-bowl.md",
+      "tags": [
+        "rice bowl",
+        "turmeric / golden",
+        "built-in flavour",
+        "meal prep",
+        "vegan option"
+      ],
+      "ingredients": [
+        "EveGlō Instant Turmeric Shirataki Rice",
+        "Roasted broccolini or broccoli florets",
+        "Roasted zucchini pieces",
+        "Roasted sweet potato or squash cubes",
+        "Roasted red bell pepper pieces",
+        "Roasted chickpeas",
+        "Hummus or tahini-lemon sauce",
+        "Fresh parsley or cilantro",
+        "Olive oil",
+        "Lemon or lime juice",
+        "Black pepper",
+        "Sea salt, to taste",
+        "Optional chili flakes"
+      ],
+      "websiteNote": "Use this when the visitor chooses rice, lowest calories, fast meal, turmeric / golden, or meal prep. The image reads clearly as a warm golden rice bowl with roasted vegetables and plant-based protein."
+    },
+    {
+      "id": "instant-coconut-shirataki-rice-curry-bowl",
+      "product": "EveGlō Instant Coconut Shirataki Rice",
+      "dish": "Coconut Shirataki Rice Curry Bowl",
+      "image": "images/eveglo-instant-coconut-shirataki-rice_coconut-curry-bowl.png",
+      "webp": "webp/eveglo-instant-coconut-shirataki-rice_coconut-curry-bowl.webp",
+      "note": "notes/eveglo-instant-coconut-shirataki-rice_coconut-curry-bowl.md",
+      "tags": [
+        "rice bowl",
+        "curry or stew",
+        "coconut",
+        "comfort meal",
+        "vegan option"
+      ],
+      "ingredients": [
+        "EveGlō Instant Coconut Shirataki Rice",
+        "Coconut milk or light coconut cream",
+        "Green or yellow curry paste",
+        "Red bell pepper strips",
+        "Yellow bell pepper strips",
+        "Snap peas or green beans",
+        "Spinach or leafy greens",
+        "Tofu, chickpeas, or chicken-style protein",
+        "Fresh cilantro",
+        "Lime wedge",
+        "Fresh chili slices",
+        "Microgreens or sprouts",
+        "Salt and pepper, to taste"
+      ],
+      "websiteNote": "Use this when the visitor chooses rice, curry or stew, built-in flavour, coconut, or comfort-style meals. The image has a clear coconut-curry direction without needing the product box in frame."
+    },
+    {
+      "id": "instant-shirataki-rice-stir-fry-bowl",
+      "product": "EveGlō Instant Shirataki Rice",
+      "dish": "Classic Shirataki Rice Stir-Fry Bowl",
+      "image": "images/eveglo-instant-shirataki-rice_stir-fry-rice-bowl.png",
+      "webp": "webp/eveglo-instant-shirataki-rice_stir-fry-rice-bowl.webp",
+      "note": "notes/eveglo-instant-shirataki-rice_stir-fry-rice-bowl.md",
+      "tags": [
+        "rice bowl",
+        "stir-fry",
+        "neutral base",
+        "fast meal",
+        "balanced bowl"
+      ],
+      "ingredients": [
+        "EveGlō Instant Shirataki Rice",
+        "Broccoli florets",
+        "Red bell pepper strips",
+        "Yellow bell pepper strips",
+        "Snap peas",
+        "Scallions",
+        "Tofu, tempeh, or chicken-style protein",
+        "Garlic",
+        "Fresh ginger",
+        "Tamari or soy sauce",
+        "Sesame oil",
+        "Sesame seeds",
+        "Lime wedges",
+        "Fresh cilantro"
+      ],
+      "websiteNote": "Use this as the default rice recommendation when the visitor chooses neutral base, stir-fry, lower carbs, fast meal, or recommend for me. It shows a familiar rice bowl format with strong colour contrast."
+    },
+    {
+      "id": "high-protein-linguine-creamy-mushroom",
+      "product": "EveGlō High Protein Linguine",
+      "dish": "Creamy Mushroom High Protein Linguine",
+      "image": "images/eveglo-high-protein-linguine_creamy-mushroom-linguine.png",
+      "webp": "webp/eveglo-high-protein-linguine_creamy-mushroom-linguine.webp",
+      "note": "notes/eveglo-high-protein-linguine_creamy-mushroom-linguine.md",
+      "tags": [
+        "linguine",
+        "creamy pasta",
+        "more protein",
+        "comfort meal",
+        "high protein"
+      ],
+      "ingredients": [
+        "EveGlō High Protein Linguine",
+        "Sliced mushrooms",
+        "Garlic",
+        "Light cream, oat cream, or cashew cream",
+        "Parmesan or nutritional yeast",
+        "Fresh parsley",
+        "Black pepper",
+        "Olive oil or butter",
+        "Lemon zest or a small squeeze of lemon",
+        "Sea salt, to taste"
+      ],
+      "websiteNote": "Use this when the visitor chooses linguine, creamy pasta, more protein, or a richer dinner-style option. The mushrooms distinguish it from the fettuccine Alfredo image."
+    },
+    {
+      "id": "dried-shirataki-noodles-vegetable-stir-fry",
+      "product": "EveGlō Dried Shirataki Noodles",
+      "dish": "Vegetable Stir-Fried Shirataki Noodles",
+      "image": "images/eveglo-dried-shirataki-noodles_vegetable-stir-fry-noodles.png",
+      "webp": "webp/eveglo-dried-shirataki-noodles_vegetable-stir-fry-noodles.webp",
+      "note": "notes/eveglo-dried-shirataki-noodles_vegetable-stir-fry-noodles.md",
+      "tags": [
+        "noodles",
+        "stir-fry",
+        "lower carbs",
+        "fast meal",
+        "neutral base"
+      ],
+      "ingredients": [
+        "EveGlō Dried Shirataki Noodles",
+        "Red bell pepper strips",
+        "Carrot matchsticks",
+        "Snap peas",
+        "Broccoli florets",
+        "Sliced mushrooms",
+        "Scallions",
+        "Garlic",
+        "Fresh ginger",
+        "Tamari or soy sauce",
+        "Rice vinegar",
+        "Sesame oil",
+        "Sesame seeds",
+        "Optional chili crisp or chili flakes"
+      ],
+      "websiteNote": "Use this when the visitor chooses noodles, stir-fry, lower carbs, or fast meal. It works as the most versatile noodle recommendation."
+    },
+    {
+      "id": "high-protein-fettuccine-alfredo",
+      "product": "EveGlō High Protein Fettuccine",
+      "dish": "Creamy High Protein Fettuccine Alfredo",
+      "image": "images/eveglo-high-protein-fettuccine_creamy-fettuccine-alfredo.png",
+      "webp": "webp/eveglo-high-protein-fettuccine_creamy-fettuccine-alfredo.webp",
+      "note": "notes/eveglo-high-protein-fettuccine_creamy-fettuccine-alfredo.md",
+      "tags": [
+        "fettuccine",
+        "creamy pasta",
+        "more protein",
+        "quick cook",
+        "high protein"
+      ],
+      "ingredients": [
+        "EveGlō High Protein Fettuccine",
+        "Light cream, milk, oat cream, or cashew cream",
+        "Garlic",
+        "Parmesan or nutritional yeast",
+        "Fresh parsley",
+        "Black pepper",
+        "Olive oil or butter",
+        "Lemon juice or zest",
+        "Sea salt, to taste"
+      ],
+      "websiteNote": "Use this when the visitor chooses fettuccine, creamy pasta, more protein, or quick cook. Keep it separate from linguine by using a clean Alfredo-style description without mushrooms as the main visual cue."
+    },
+    {
+      "id": "dried-shirataki-spaghetti-rustic-pomodoro",
+      "product": "EveGlō Dried Shirataki Spaghetti",
+      "dish": "Rustic Shirataki Spaghetti Pomodoro",
+      "image": "images/eveglo-dried-shirataki-spaghetti_rustic-pomodoro.png",
+      "webp": "webp/eveglo-dried-shirataki-spaghetti_rustic-pomodoro.webp",
+      "note": "notes/eveglo-dried-shirataki-spaghetti_rustic-pomodoro.md",
+      "tags": [
+        "spaghetti",
+        "tomato pasta",
+        "lower carbs",
+        "neutral base",
+        "classic sauce"
+      ],
+      "ingredients": [
+        "EveGlō Dried Shirataki Spaghetti",
+        "Crushed tomatoes or tomato passata",
+        "Garlic",
+        "Olive oil",
+        "Fresh basil leaves, torn",
+        "Parmesan or vegan parmesan, optional",
+        "Black pepper",
+        "Sea salt, to taste",
+        "Optional chili flakes"
+      ],
+      "websiteNote": "Use this when the visitor chooses spaghetti, tomato pasta, lower carbs, or neutral base. This version is chunkier and more rustic, so it does not read like cherry tomatoes."
+    },
+    {
+      "id": "high-protein-spaghetti-tomato-basil",
+      "product": "EveGlō High Protein Spaghetti",
+      "dish": "High Protein Tomato Basil Spaghetti",
+      "image": "images/eveglo-high-protein-spaghetti_tomato-basil-spaghetti.png",
+      "webp": "webp/eveglo-high-protein-spaghetti_tomato-basil-spaghetti.webp",
+      "note": "notes/eveglo-high-protein-spaghetti_tomato-basil-spaghetti.md",
+      "tags": [
+        "spaghetti",
+        "tomato pasta",
+        "more protein",
+        "meal prep",
+        "classic sauce"
+      ],
+      "ingredients": [
+        "EveGlō High Protein Spaghetti",
+        "Tomato passata or smooth tomato sauce",
+        "Garlic",
+        "Olive oil",
+        "Fresh basil crown and chopped basil",
+        "Parmesan or vegan parmesan, optional",
+        "Black pepper",
+        "Sea salt, to taste",
+        "Optional red pepper flakes"
+      ],
+      "websiteNote": "Use this when the visitor chooses spaghetti, tomato pasta, more protein, or meal prep. This one is smoother and cleaner than the rustic dried-shirataki spaghetti image."
+    },
+    {
+      "id": "shirataki-penne-oat-fiber-pesto",
+      "product": "EveGlō Shirataki Penne with Oat Fiber",
+      "dish": "Oat Fiber Shirataki Penne with Pesto",
+      "image": "images/eveglo-shirataki-penne-with-oat-fiber_pesto-penne.png",
+      "webp": "webp/eveglo-shirataki-penne-with-oat-fiber_pesto-penne.webp",
+      "note": "notes/eveglo-shirataki-penne-with-oat-fiber_pesto-penne.md",
+      "tags": [
+        "penne",
+        "oat fiber",
+        "creamy pasta",
+        "lower carbs",
+        "fresh basil"
+      ],
+      "ingredients": [
+        "EveGlō Shirataki Penne with Oat Fiber",
+        "Basil pesto",
+        "Cherry tomatoes, halved",
+        "Fresh basil leaves",
+        "Pine nuts",
+        "Parmesan or nutritional yeast",
+        "Olive oil",
+        "Lemon juice",
+        "Black pepper",
+        "Sea salt, to taste"
+      ],
+      "websiteNote": "Use this when the visitor chooses penne, oat fiber, creamy pasta, or no preference. The pesto direction separates it from tomato spaghetti and Alfredo-style pasta images."
+    }
+  ]
+}

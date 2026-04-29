@@ -702,6 +702,81 @@ h1, h2, h3 {
   font-size: 0.82rem;
   font-weight: 800;
 }
+.recipe-inspiration {
+  margin-top: 28px;
+  padding: clamp(24px, 4vw, 36px);
+  border: 1px solid rgba(46, 212, 79, 0.2);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 94% 10%, rgba(255, 215, 25, 0.28), transparent 24%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(223, 249, 230, 0.68));
+  box-shadow: 0 18px 48px rgba(34, 36, 41, 0.08);
+}
+.recipe-heading {
+  max-width: 760px;
+  margin-bottom: 22px;
+}
+.recipe-heading h3 {
+  margin: 0;
+  color: var(--charcoal);
+  font-size: clamp(1.9rem, 3.4vw, 3.2rem);
+  line-height: 1.04;
+}
+.recipe-heading p:not(.eyebrow) {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.65;
+}
+.recipe-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.recipe-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--white);
+  box-shadow: 0 14px 38px rgba(34, 36, 41, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 52px rgba(34, 36, 41, 0.13);
+}
+.recipe-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: block;
+  object-fit: cover;
+}
+.recipe-card div {
+  padding: 18px;
+}
+.recipe-card span {
+  display: inline-flex;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  padding: 7px 9px;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+.recipe-card h4 {
+  margin: 0;
+  color: var(--charcoal);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.12;
+}
+.recipe-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
 
 .collection, .konjac-section {
   max-width: 1240px;
@@ -1361,7 +1436,8 @@ h1, h2, h3 {
   .site-search { margin-bottom: 14px; }
   .category-strip, .product-grid { grid-template-columns: repeat(2, 1fr); }
   .glow-finder-shell,
-  .glow-quiz {
+  .glow-quiz,
+  .recipe-card-grid {
     grid-template-columns: 1fr;
   }
   .glow-result {
@@ -1621,6 +1697,17 @@ h1, h2, h3 {
   }
   .result-card h3 {
     font-size: 1.45rem;
+  }
+  .recipe-inspiration {
+    margin-top: 22px;
+    padding: 22px 16px;
+    border-radius: 26px;
+  }
+  .recipe-card {
+    border-radius: 22px;
+  }
+  .recipe-card img {
+    aspect-ratio: 16 / 10;
   }
   .collection-search {
     max-width: none;

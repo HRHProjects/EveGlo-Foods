@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { departments, highlights, konjacFacts, products } from './productData.js';
 import glowFinderEngine from './glowFinderProductEngine.json';
+import recipeReference from './recipeReferenceManifest.json';
 
 const heroImage = {
   image: '/assets/hero-gallery/collection-mockup-5.png',
@@ -67,6 +68,14 @@ function scoreGlowProducts(answers) {
       if (bQuick !== aQuick) return bQuick - aQuick;
       return textFor(a.product.name).localeCompare(textFor(b.product.name));
     });
+}
+
+function recipeImagePath(recipe) {
+  return `/assets/eveglo/recipes/${recipe.webp.split('/').pop()}`;
+}
+
+function recipeMatchesProduct(recipe, product) {
+  return Boolean(product && recipe.id.startsWith(product.id));
 }
 
 function FoodCharacter({ variant, className = '' }) {
@@ -229,9 +238,20 @@ function GlowFinder({ navigate }) {
     item.bestFor.some((tag) => selectedValues.includes(tag)) ||
     item.products.includes(bestMatch?.id)
   )) || glowFinderEngine.bundles[0];
-  const recipes = glowFinderEngine.recipePairings.filter((recipe) => (
-    recipe.productId === bestMatch?.id || recipe.tags.some((tag) => selectedValues.includes(tag))
-  )).slice(0, 3);
+  const recipeIdeas = useMemo(() => {
+    const recommendedProducts = [bestMatch, ...alternates].filter(Boolean);
+    const directMatches = recipeReference.items.filter((recipe) => (
+      recommendedProducts.some((product) => recipeMatchesProduct(recipe, product))
+    ));
+    const selectedTagText = selectedValues.join(' ').replaceAll('_', ' ').toLowerCase();
+    const tagMatches = recipeReference.items.filter((recipe) => (
+      !directMatches.includes(recipe) &&
+      recipe.tags.some((tag) => selectedTagText.includes(tag.toLowerCase()) || tag.toLowerCase().includes(selectedTagText))
+    ));
+    return [...directMatches, ...tagMatches, ...recipeReference.items]
+      .filter((recipe, index, list) => list.findIndex((item) => item.id === recipe.id) === index)
+      .slice(0, 4);
+  }, [bestMatch, alternates, selectedValues]);
 
   const updateAnswer = (questionId, optionId) => {
     setAnswers((current) => ({ ...current, [questionId]: optionId }));
@@ -305,17 +325,31 @@ function GlowFinder({ navigate }) {
               <p>{bundle.products.length} products matched for your meal direction.</p>
             </div>
 
-            {recipes.length > 0 && (
-              <div className="recipe-strip">
-                {recipes.map((recipe) => (
-                  <span key={recipe.id}>{textFor(recipe.title)}</span>
-                ))}
-              </div>
-            )}
-
             <p className="glow-disclaimer">{glowFinderEngine.dataPolicy.publicFacingDisclaimer}</p>
           </aside>
         )}
+      </div>
+
+      <div className="recipe-inspiration" aria-label="Recipe inspiration using EveGlo products">
+        <div className="recipe-heading">
+          <p className="eyebrow"><Leaf size={16} /> Serving ideas</p>
+          <h3>Turn your Glow Finder match into a meal idea.</h3>
+          <p>
+            These finished dishes are inspiration only. EveGlo products can be used as the base ingredient, while sauces, vegetables, proteins, and toppings are meal ideas, not EveGlo product offerings.
+          </p>
+        </div>
+        <div className="recipe-card-grid">
+          {recipeIdeas.map((recipe) => (
+            <article className="recipe-card" key={recipe.id}>
+              <img src={recipeImagePath(recipe)} alt={textFor(recipe.dish)} loading="lazy" decoding="async" />
+              <div>
+                <span>{textFor(recipe.product)}</span>
+                <h4>{textFor(recipe.dish)}</h4>
+                <p>{textFor(recipe.websiteNote)}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
