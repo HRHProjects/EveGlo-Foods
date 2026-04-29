@@ -494,7 +494,7 @@ h1, h2, h3 {
 .glow-finder {
   max-width: 1240px;
   margin: 0 auto;
-  padding: 18px 22px 28px;
+  padding: 18px 22px 0;
 }
 .glow-finder-intro {
   max-width: 760px;
@@ -517,6 +517,10 @@ h1, h2, h3 {
   grid-template-columns: minmax(0, 1fr) minmax(340px, 0.48fr);
   gap: 24px;
   align-items: start;
+}
+.glow-workspace {
+  display: grid;
+  gap: 18px;
 }
 .glow-quiz {
   display: grid;
@@ -568,6 +572,10 @@ h1, h2, h3 {
   padding: 0 13px;
   font-size: 0.84rem;
   font-weight: 900;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.glow-options button:hover {
+  transform: translateY(-1px);
 }
 .glow-options button.active {
   border-color: rgba(0, 120, 168, 0.22);
@@ -602,6 +610,7 @@ h1, h2, h3 {
     radial-gradient(circle at 88% 12%, rgba(122, 201, 67, 0.28), transparent 26%),
     linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(243, 239, 231, 0.82));
   box-shadow: 0 22px 58px rgba(34, 36, 41, 0.12);
+  animation: glowPanelIn 0.34s ease both;
 }
 .result-image {
   min-height: 280px;
@@ -702,80 +711,150 @@ h1, h2, h3 {
   font-size: 0.82rem;
   font-weight: 800;
 }
-.recipe-inspiration {
-  margin-top: 22px;
-  padding: clamp(24px, 4vw, 36px);
+.result-recipes {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
   border: 1px solid rgba(46, 212, 79, 0.2);
-  border-radius: 32px;
+  border-radius: 24px;
   background:
     radial-gradient(circle at 94% 10%, rgba(255, 215, 25, 0.28), transparent 24%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(223, 249, 230, 0.68));
-  box-shadow: 0 18px 48px rgba(34, 36, 41, 0.08);
+  box-shadow: 0 14px 36px rgba(34, 36, 41, 0.08);
+  animation: glowPanelIn 0.34s ease both;
 }
-.recipe-heading {
-  max-width: 760px;
-  margin-bottom: 22px;
+.result-recipes-heading {
+  display: grid;
+  gap: 8px;
 }
-.recipe-heading h3 {
+.result-recipes-heading > span {
+  width: max-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 999px;
+  background: #10242c;
+  color: var(--white);
+  padding: 8px 11px;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+.result-recipes-heading h4 {
   margin: 0;
   color: var(--charcoal);
-  font-size: clamp(1.9rem, 3.4vw, 3.2rem);
-  line-height: 1.04;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.08;
 }
-.recipe-heading p:not(.eyebrow) {
-  margin: 14px 0 0;
+.result-recipes-heading p {
+  margin: 0;
   color: var(--muted);
+  font-size: 0.9rem;
   font-weight: 800;
-  line-height: 1.65;
+  line-height: 1.55;
 }
-.recipe-card-grid {
+.result-recipe-list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
-.recipe-card {
+.result-recipe-card {
+  min-width: 0;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 18px;
   background: var(--white);
-  box-shadow: 0 14px 38px rgba(34, 36, 41, 0.08);
+  box-shadow: 0 10px 26px rgba(34, 36, 41, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: recipeCardIn 0.36s ease both;
 }
-.recipe-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 22px 52px rgba(34, 36, 41, 0.13);
+.result-recipe-card:nth-child(2) { animation-delay: 0.04s; }
+.result-recipe-card:nth-child(3) { animation-delay: 0.08s; }
+.result-recipe-card:nth-child(4) { animation-delay: 0.12s; }
+.result-recipe-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(34, 36, 41, 0.12);
 }
-.recipe-card img {
+.result-recipe-card img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
+  min-height: 112px;
   display: block;
   object-fit: cover;
 }
-.recipe-card div {
-  padding: 18px;
+.result-recipe-card div {
+  min-width: 0;
+  padding: 12px 12px 12px 0;
 }
-.recipe-card span {
+.result-recipe-card span {
   display: inline-flex;
   margin-bottom: 10px;
   border-radius: 999px;
   background: var(--green-soft);
   color: var(--green-dark);
   padding: 7px 9px;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 900;
 }
-.recipe-card h4 {
+.result-recipe-card h5 {
   margin: 0;
   color: var(--charcoal);
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1.12;
 }
-.recipe-card p {
-  margin: 12px 0 0;
+.result-recipe-card p {
+  margin: 8px 0 0;
   color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.55;
+  font-size: 0.8rem;
+  line-height: 1.42;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.result-recipe-card ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.result-recipe-card li {
+  border-radius: 999px;
+  background: rgba(255, 215, 25, 0.24);
+  color: #3f3a13;
+  padding: 5px 7px;
+  font-size: 0.68rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+@keyframes glowPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes recipeCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .collection, .konjac-section {
@@ -783,7 +862,7 @@ h1, h2, h3 {
   margin: 0 auto;
 }
 .collection {
-  padding: 4px 22px 76px;
+  padding: 0 22px 76px;
 }
 .konjac-section {
   padding: 20px 22px 76px;
@@ -1441,9 +1520,11 @@ h1, h2, h3 {
   .site-search { margin-bottom: 14px; }
   .category-strip, .product-grid { grid-template-columns: repeat(2, 1fr); }
   .glow-finder-shell,
-  .glow-quiz,
-  .recipe-card-grid {
+  .glow-quiz {
     grid-template-columns: 1fr;
+  }
+  .result-recipe-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .glow-result {
     position: static;
@@ -1667,10 +1748,10 @@ h1, h2, h3 {
     padding-right: 64px;
   }
   .glow-finder {
-    padding: 16px 16px 24px;
+    padding: 16px 16px 0;
   }
   .collection {
-    padding: 6px 16px 56px;
+    padding: 0 16px 56px;
   }
   .konjac-section {
     padding: 16px 16px 56px;
@@ -1708,16 +1789,18 @@ h1, h2, h3 {
   .result-card h3 {
     font-size: 1.45rem;
   }
-  .recipe-inspiration {
-    margin-top: 18px;
-    padding: 22px 16px;
-    border-radius: 26px;
-  }
-  .recipe-card {
+  .result-recipes {
+    padding: 16px;
     border-radius: 22px;
   }
-  .recipe-card img {
-    aspect-ratio: 16 / 10;
+  .result-recipe-list {
+    grid-template-columns: 1fr;
+  }
+  .result-recipe-card {
+    border-radius: 18px;
+  }
+  .result-recipe-card img {
+    min-height: 118px;
   }
   .collection-search {
     max-width: none;

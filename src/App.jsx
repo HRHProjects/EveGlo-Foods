@@ -288,33 +288,63 @@ function GlowFinder({ navigate }) {
       </div>
 
       <div className="glow-finder-shell">
-        <div className="glow-quiz" aria-label="Glow Finder questions">
-          {glowQuestions.map((question, index) => (
-            <fieldset className="glow-question" key={question.id}>
-              <legend>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                {textFor(question.label)}
-              </legend>
-              <div className="glow-options">
-                {question.options.map((option) => (
-                  <button
-                    type="button"
-                    key={option.id}
-                    className={answers[question.id] === option.id ? 'active' : ''}
-                    onClick={() => updateAnswer(question.id, option.id)}
-                  >
-                    {textFor(option.label)}
-                  </button>
-                ))}
-              </div>
-            </fieldset>
-          ))}
+        <div className="glow-workspace">
+          <div className="glow-quiz" aria-label="Glow Finder questions">
+            {glowQuestions.map((question, index) => (
+              <fieldset className="glow-question" key={question.id}>
+                <legend>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  {textFor(question.label)}
+                </legend>
+                <div className="glow-options">
+                  {question.options.map((option) => (
+                    <button
+                      type="button"
+                      key={option.id}
+                      className={answers[question.id] === option.id ? 'active' : ''}
+                      onClick={() => updateAnswer(question.id, option.id)}
+                    >
+                      {textFor(option.label)}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+            ))}
+          </div>
+
+          <div className="result-recipes" key={recipeIdeas.map((recipe) => recipe.id).join('-')} aria-label="Serving ideas for the selected Glow Finder result">
+            <div className="result-recipes-heading">
+              <span><Leaf size={15} /> Serving ideas</span>
+              <h4>Meal ideas for this match</h4>
+              <p>
+                Inspiration only: EveGlo products can be used as the base ingredient, while sauces, vegetables, proteins, and toppings are meal ideas.
+              </p>
+            </div>
+            <div className="result-recipe-list">
+              {recipeIdeas.map((recipe) => (
+                <article className="result-recipe-card" key={recipe.id}>
+                  <img src={recipeImagePath(recipe)} alt={textFor(recipe.dish)} loading="lazy" decoding="async" />
+                  <div>
+                    <span>{textFor(recipe.product)}</span>
+                    <h5>{textFor(recipe.dish)}</h5>
+                    <p>{textFor(recipe.websiteNote)}</p>
+                    <ul aria-label={`Ingredients for ${textFor(recipe.dish)}`}>
+                      {recipe.ingredients.slice(0, 5).map((ingredient) => (
+                        <li key={ingredient}>{textFor(ingredient)}</li>
+                      ))}
+                      {recipe.ingredients.length > 5 && <li>+{recipe.ingredients.length - 5} more</li>}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
 
         {bestMatch && (
           <aside className="glow-result" aria-live="polite">
             <div className="result-label">{textFor(glowFinderEngine.ui.resultLabels.bestMatch)}</div>
-            <div className="result-card">
+            <div className="result-card" key={bestMatch.id}>
               <div className="result-image">
                 <img src={bestMatch.image} alt={textFor(bestMatch.name)} loading="lazy" decoding="async" />
               </div>
@@ -350,28 +380,6 @@ function GlowFinder({ navigate }) {
             <p className="glow-disclaimer">{glowFinderEngine.dataPolicy.publicFacingDisclaimer}</p>
           </aside>
         )}
-      </div>
-
-      <div className="recipe-inspiration" aria-label="Recipe inspiration using EveGlo products">
-        <div className="recipe-heading">
-          <p className="eyebrow"><Leaf size={16} /> Serving ideas</p>
-          <h3>Turn your Glow Finder match into a meal idea.</h3>
-          <p>
-            These finished dishes are inspiration only. EveGlo products can be used as the base ingredient, while sauces, vegetables, proteins, and toppings are meal ideas, not EveGlo product offerings.
-          </p>
-        </div>
-        <div className="recipe-card-grid">
-          {recipeIdeas.map((recipe) => (
-            <article className="recipe-card" key={recipe.id}>
-              <img src={recipeImagePath(recipe)} alt={textFor(recipe.dish)} loading="lazy" decoding="async" />
-              <div>
-                <span>{textFor(recipe.product)}</span>
-                <h4>{textFor(recipe.dish)}</h4>
-                <p>{textFor(recipe.websiteNote)}</p>
-              </div>
-            </article>
-          ))}
-        </div>
       </div>
     </section>
   );
