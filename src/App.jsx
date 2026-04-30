@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowRight,
   Check,
+  ChevronDown,
   Leaf,
   Mail,
   Megaphone,
@@ -272,6 +273,49 @@ function ComingSoon() {
         Fresh product details, ordering, recipes, and wholesale updates are on the way.
       </p>
       <a href="mailto:Info@EveGlofoods.com">Contact us for launch updates <ArrowRight size={17} /></a>
+    </section>
+  );
+}
+
+function HomeLaunchUpdate() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <section className={`home-launch-update ${open ? 'is-open' : ''}`} aria-label="Launch update">
+      <button
+        type="button"
+        className="launch-update-toggle"
+        aria-expanded={open}
+        aria-controls="home-launch-update-panel"
+        onClick={() => setOpen((current) => !current)}
+      >
+        <span className="launch-update-icon"><Megaphone size={19} /></span>
+        <span>
+          <small>Launch update</small>
+          <strong>EveGlo Foods launch delayed during ongoing Pacdora dispute</strong>
+        </span>
+        <time dateTime="2026-04-28">April 28, 2026</time>
+        <ChevronDown size={20} className="launch-update-chevron" aria-hidden="true" />
+      </button>
+
+      <div className="launch-update-panel" id="home-launch-update-panel">
+        <div className="launch-update-content">
+          <p>
+            EveGlo Foods is temporarily delaying its product launch due to an ongoing dispute with Pacdora,
+            a packaging mockup and dieline platform used by creators and packaging teams.
+          </p>
+          <p>
+            This has been a difficult chapter for a small Alberta team working to bring a new health-focused
+            pantry brand to market. Even with the delay, EveGlo Foods remains committed to protecting the
+            brand, preserving the product vision, and moving forward with care.
+          </p>
+          <p>
+            Further updates and announcements about launch timing, product availability, and next steps will
+            be released in the coming weeks.
+          </p>
+          <a href="/news/eveglo-foods-launch-delay/">Read the full update <ArrowRight size={17} /></a>
+        </div>
+      </div>
     </section>
   );
 }
@@ -1050,6 +1094,7 @@ export default function App() {
             <Hero navigate={navigate} />
             <CategoryStrip navigate={navigate} />
             <ComingSoon />
+            <HomeLaunchUpdate />
             <FeaturedCollection
               onOpenProduct={openProduct}
               searchQuery={searchQuery}
