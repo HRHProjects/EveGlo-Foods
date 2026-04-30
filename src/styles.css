@@ -1578,7 +1578,19 @@ h1, h2, h3 {
 
 @media (min-width: 1021px) {
   .collection {
+    max-width: none;
     overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .collection > .section-heading,
+  .collection > .collection-search,
+  .collection > .filter-row,
+  .collection > .empty-search {
+    width: min(1196px, calc(100% - 44px));
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .collection .product-grid {
@@ -1586,8 +1598,8 @@ h1, h2, h3 {
     grid-auto-flow: column;
     grid-auto-columns: 278px;
     width: max-content;
-    margin: -8px -22px 0;
-    padding: 8px 22px 22px;
+    margin: -8px 0 0;
+    padding: 8px 0 22px;
     animation: desktopProductDrift 46s linear infinite;
     will-change: transform;
   }
